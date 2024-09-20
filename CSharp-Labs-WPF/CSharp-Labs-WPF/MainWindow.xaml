@@ -1,0 +1,44 @@
+﻿<Window x:Class="CSharp_Labs_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSharp_Labs_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="510" Width="1215">
+    <Grid>
+        <Label x:Name="taskNameLabel" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="taskTextLabel" Content="Label" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="tasksComboBox" HorizontalAlignment="Left" Margin="948,23,0,0" VerticalAlignment="Top" Width="223" SelectionChanged="Tasks_SelectionChanged" IsReadOnly="True">
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 1"/>
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 3"/>
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 5"/>
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 7"/>
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 9"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 1"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 3"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 5"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 7"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 9"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 1"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 3"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 5"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 7"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 9"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 1"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 3"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 5"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 7"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 9"/>
+        </ComboBox>
+        <Label x:Name="entryMessageLabel" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="userValue1" HorizontalAlignment="Left" Margin="607,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="userValue2" HorizontalAlignment="Left" Margin="607,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="userValue3" HorizontalAlignment="Left" Margin="607,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="showResultButton" Content="Show_Result" HorizontalAlignment="Left" Margin="748,56,0,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
+        <Label x:Name="valueName1" Content="Label" HorizontalAlignment="Left" Margin="564,50,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label x:Name="valueName2" Content="Label" HorizontalAlignment="Left" Margin="563,73,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label x:Name="valueName3" Content="Label" HorizontalAlignment="Left" Margin="564,96,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label x:Name="resultLabel" Content="Label" HorizontalAlignment="Left" Margin="608,139,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
