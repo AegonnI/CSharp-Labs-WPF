@@ -22,19 +22,18 @@ namespace CSharp_Labs_WPF
     public partial class MainWindow : Window
     {
         string task;
-        //System.Windows.Controls.Label taskTextLabel;
+        ChildOfLab2_13 binaryAttack;
 
         public MainWindow()
         {
             InitializeComponent();
+            binaryAttack = new ChildOfLab2_13();
         }
 
         private void Tasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //task = tasksComboBox.Text;
             task = tasksComboBox.SelectedItem.ToString().Substring(38);
             resultLabel.Content = "";
-            //resultLabel.Content = tasksComboBox.SelectedItem.ToString().Substring(38);
             userValue1.Text = "";
             userValue2.Text = "";
             userValue3.Text = "";
@@ -414,6 +413,23 @@ namespace CSharp_Labs_WPF
                          "arr = ", "x = ");
                     break;
 
+                case "Lab 2: Задание 13":
+                    TaskChanger("Задание 13",
+
+                         "Разработать класс с двумя логическими полями. Создать конструктор" +
+                         "\r\nкопирования. Разработать метод, вычисляющий импликацию полей." +
+                         "\r\nПерегрузить метод ToString() для формирования строки из полей класса." +
+                         "\r\nРеализовать дочерний класс (его содержание предложить самостоятельно" +
+                         "\r\nи описать в решении: какой содержательный смысл имеют поля;" +
+                         "\r\nреализовать конструкторы; предложить и реализовать 2-3 метода)." +
+                         "\r\nПротестировать все конструкторы и другие методы базового и дочернего" +
+                         "\r\nклассов.",
+
+                         "Введите булевые значения",
+
+                         "X = ", "Y = ");
+                    break;
+
                 default:
                     break;
             }
@@ -554,7 +570,6 @@ namespace CSharp_Labs_WPF
             taskTextLabel.Content = taskText;
             entryMessageLabel.Content = entryMessage;
             ChangeInputField(v1, v2, v3);
-            //ChangeLabel(label4);
         }
 
         void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
@@ -562,10 +577,6 @@ namespace CSharp_Labs_WPF
             valueName1.Content = v1;
             valueName2.Content = v2;
             valueName3.Content = v3;
-
-            //userValue1.IsEnabled = v1 != "";
-            //userValue2.IsEnabled = v2 != "";
-            //userValue3.IsEnabled = v3 != "";
 
             if (v1 != "")
             {
@@ -594,30 +605,39 @@ namespace CSharp_Labs_WPF
                 userValue3.Visibility = Visibility.Hidden;
             }
 
-            //if (v3 != "")
-            //{
-            //    label4.Location = new Point(textBox3.Location.X, textBox3.Location.Y + 30);
-            //}
-            //else if (v2 != "")
-            //{
-            //    label4.Location = new Point(textBox2.Location.X, textBox2.Location.Y + 30);
-            //}
-            //else if (v1 != "")
-            //{
-            //    label4.Location = new Point(textBox1.Location.X, textBox1.Location.Y + 30);
-            //}
+            resultLabel.RenderTransform = new TranslateTransform();
+            if (v3 != "")
+            {
+                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue3.Margin.Top + 23 - resultLabel.Margin.Top;
+            }
+            else if (v2 != "")
+            {
+                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue2.Margin.Top + 23 - resultLabel.Margin.Top;
+            }
+            else if (v1 != "")
+            {
+                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue1.Margin.Top + 23 - resultLabel.Margin.Top;
+            }
         }
-
-        //void ChangeLabel(Label label, string font = "Segoe UI", float emSize = 9F)
-        //{
-        //label.Font = new Font(font, emSize, FontStyle.Regular, GraphicsUnit.Point, 204);
-        //}
 
         void ResultText(Func<bool> checkFunc, Func<string> resultFunc)
         {
             resultLabel.Content = LabMath.ResultText(
                 () => checkFunc(),
                 () => resultFunc());
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.D && task == "Lab 2: Задание 13")
+            {
+                binaryAttack.Plus();
+            }
+            if (e.Key == Key.A && task == "Lab 2: Задание 13")
+            {
+                binaryAttack.Minus();                
+            }
+            resultLabel.Content = binaryAttack.ToString();
         }
     }
 }

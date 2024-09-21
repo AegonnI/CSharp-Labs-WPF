@@ -63,6 +63,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ChildOfLab2-13.cs" />
+    <Compile Include="Lab2-13.cs" />
     <Compile Include="LabChecker.cs" />
     <Compile Include="LabConverter.cs" />
     <Compile Include="LabMath.cs" />

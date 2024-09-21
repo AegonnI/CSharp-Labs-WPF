@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharp_Labs_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="510" Width="1215">
+        Title="MainWindow" Height="510" Width="1215" KeyDown="OnKeyDownHandler">
     <Grid>
         <Label x:Name="taskNameLabel" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="taskTextLabel" Content="Label" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
@@ -30,6 +30,7 @@
             <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 5"/>
             <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 7"/>
             <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 9"/>
+            <ComboBoxItem Content="Lab 2: Задание 13"/>
         </ComboBox>
         <Label x:Name="entryMessageLabel" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="userValue1" HorizontalAlignment="Left" Margin="607,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
@@ -37,7 +38,7 @@
         <TextBox x:Name="userValue3" HorizontalAlignment="Left" Margin="607,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="showResultButton" Content="Show_Result" HorizontalAlignment="Left" Margin="748,56,0,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
         <Label x:Name="valueName1" Content="Label" HorizontalAlignment="Left" Margin="564,50,0,0" VerticalAlignment="Top" Height="25"/>
-        <Label x:Name="valueName2" Content="Label" HorizontalAlignment="Left" Margin="563,73,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label x:Name="valueName2" Content="Label" HorizontalAlignment="Left" Margin="564,73,0,0" VerticalAlignment="Top" Height="25"/>
         <Label x:Name="valueName3" Content="Label" HorizontalAlignment="Left" Margin="564,96,0,0" VerticalAlignment="Top" Height="25"/>
         <Label x:Name="resultLabel" Content="Label" HorizontalAlignment="Left" Margin="608,139,0,0" VerticalAlignment="Top"/>
     </Grid>
