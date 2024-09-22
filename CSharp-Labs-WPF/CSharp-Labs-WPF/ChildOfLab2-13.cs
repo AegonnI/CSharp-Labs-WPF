@@ -8,9 +8,13 @@ namespace CSharp_Labs_WPF
 {
     public class ChildOfLab2_13 : Lab2_13
     {
+        public bool evilX;
+        public bool evilY;
+
         public ChildOfLab2_13() : base()
         { 
-        
+            evilX = false;
+            evilY = false;
         }
 
         public void Plus()

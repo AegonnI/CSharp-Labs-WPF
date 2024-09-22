@@ -11,8 +11,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace CSharp_Labs_WPF
 {
@@ -23,11 +25,40 @@ namespace CSharp_Labs_WPF
     {
         string task;
         ChildOfLab2_13 binaryAttack;
+        public Rectangle playerBinBox1;
+        public Rectangle playerBinBox2;
 
         public MainWindow()
         {
             InitializeComponent();
             binaryAttack = new ChildOfLab2_13();
+
+            playerBinBox1 = InitRectangle("playerBinBox1", 50, 50, 100, 100, Brushes.Green);
+            playerBinBox2 = InitRectangle("playerBinBox2", 50, 50, 160, 100, Brushes.Green);
+        }
+
+        public Rectangle InitRectangle(string name, double width, double height, double x, double y, Brush brush)
+        {
+            Rectangle rectangle = new Rectangle();
+
+            rectangle.Name = name;
+            RegisterName(rectangle.Name, rectangle);
+
+            rectangle.Width = width;
+            rectangle.Height = height;
+
+            rectangle.RenderTransform = new TranslateTransform();
+
+            ((TranslateTransform)rectangle.RenderTransform).X = x;
+            ((TranslateTransform)rectangle.RenderTransform).Y = y;
+
+            rectangle.Fill = brush;
+
+            mainGrid.Children.Add(rectangle);
+
+            rectangle.Visibility = Visibility.Hidden;
+
+            return rectangle;
         }
 
         private void Tasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -428,6 +459,8 @@ namespace CSharp_Labs_WPF
                          "Введите булевые значения",
 
                          "X = ", "Y = ");
+                    playerBinBox1.Visibility = Visibility.Visible;
+                    playerBinBox2.Visibility = Visibility.Visible;
                     break;
 
                 default:
@@ -559,6 +592,10 @@ namespace CSharp_Labs_WPF
                         () => LabConverter.IntArrToText(LabMath.findAll(LabConverter.StringToIntArr(userValue1.Text.Split(' ')), int.Parse(userValue2.Text))).ToString());
                     break;
 
+                case "Lab 2: Задание 13":
+
+                    break;
+
                 default:
                     break;
             }
@@ -570,6 +607,8 @@ namespace CSharp_Labs_WPF
             taskTextLabel.Content = taskText;
             entryMessageLabel.Content = entryMessage;
             ChangeInputField(v1, v2, v3);
+            playerBinBox1.Visibility = Visibility.Hidden;
+            playerBinBox2.Visibility = Visibility.Hidden;
         }
 
         void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
@@ -632,10 +671,46 @@ namespace CSharp_Labs_WPF
             if (e.Key == Key.D && task == "Lab 2: Задание 13")
             {
                 binaryAttack.Plus();
+                playerBinBox1.Visibility = Visibility.Visible;
+                playerBinBox2.Visibility = Visibility.Visible;
+                if (binaryAttack.X)
+                {
+                    playerBinBox1.Fill = Brushes.Green;
+                }
+                else 
+                {
+                    playerBinBox1.Fill = Brushes.Black;
+                }
+                if (binaryAttack.Y)
+                {
+                    playerBinBox2.Fill = Brushes.Green;
+                }
+                else
+                {
+                    playerBinBox2.Fill = Brushes.Black;
+                }
             }
             if (e.Key == Key.A && task == "Lab 2: Задание 13")
             {
-                binaryAttack.Minus();                
+                binaryAttack.Minus();
+                playerBinBox1.Visibility = Visibility.Visible;
+                playerBinBox2.Visibility = Visibility.Visible;
+                if (binaryAttack.X)
+                {
+                    playerBinBox1.Fill = Brushes.Green;
+                }
+                else
+                {
+                    playerBinBox1.Fill = Brushes.Black;
+                }
+                if (binaryAttack.Y)
+                {
+                    playerBinBox2.Fill = Brushes.Green;
+                }
+                else
+                {
+                    playerBinBox2.Fill = Brushes.Black;
+                }
             }
             resultLabel.Content = binaryAttack.ToString();
         }
