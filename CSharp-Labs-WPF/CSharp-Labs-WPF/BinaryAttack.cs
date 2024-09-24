@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace CSharp_Labs_WPF
 {
-    public class ChildOfLab2_13 : Lab2_13
+    public class BinaryAttack : Lab2v13
     {
         public bool evilX;
         public bool evilY;
 
-        public ChildOfLab2_13() : base()
+        public BinaryAttack() : base()
         { 
-            evilX = false;
-            evilY = false;
+            evilX = (evilY = false);
         }
 
         public void Plus()

@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
@@ -24,17 +25,33 @@ namespace CSharp_Labs_WPF
     public partial class MainWindow : Window
     {
         string task;
-        ChildOfLab2_13 binaryAttack;
+        BinaryAttack binaryAttack;
         public Rectangle playerBinBox1;
         public Rectangle playerBinBox2;
+        public Rectangle evilBinBox1;
+        public Rectangle evilBinBox2;
 
         public MainWindow()
         {
             InitializeComponent();
-            binaryAttack = new ChildOfLab2_13();
+            binaryAttack = new BinaryAttack();
 
-            playerBinBox1 = InitRectangle("playerBinBox1", 50, 50, 100, 100, Brushes.Green);
-            playerBinBox2 = InitRectangle("playerBinBox2", 50, 50, 160, 100, Brushes.Green);
+            playerBinBox1 = InitRectangle("playerBinBox1", 50, 50, 100, 200, Brushes.Green);
+            playerBinBox2 = InitRectangle("playerBinBox2", 50, 50, 220, 200, Brushes.Green);
+
+            evilBinBox1 = InitRectangle("evilBinBox1", 50, 50, 100, 0, Brushes.Green);
+            evilBinBox2 = InitRectangle("evilBinBox2", 50, 50, 220, 0, Brushes.Green);
+        }
+
+        ThicknessAnimation EvilBinAnim(Thickness from, Thickness to, double fromSeconds)
+        {
+            ThicknessAnimation evilBinAnim = new ThicknessAnimation();
+            evilBinAnim.From = from;
+            evilBinAnim.To = to;
+
+            evilBinAnim.Duration = TimeSpan.FromSeconds(fromSeconds);
+
+            return evilBinAnim;           
         }
 
         public Rectangle InitRectangle(string name, double width, double height, double x, double y, Brush brush)
@@ -49,8 +66,10 @@ namespace CSharp_Labs_WPF
 
             rectangle.RenderTransform = new TranslateTransform();
 
-            ((TranslateTransform)rectangle.RenderTransform).X = x;
-            ((TranslateTransform)rectangle.RenderTransform).Y = y;
+            //((TranslateTransform)rectangle.RenderTransform).X = x;
+            //((TranslateTransform)rectangle.RenderTransform).Y = y;
+
+            rectangle.Margin = new Thickness(x, y, 0, 0);
 
             rectangle.Fill = brush;
 
@@ -459,8 +478,12 @@ namespace CSharp_Labs_WPF
                          "Введите булевые значения",
 
                          "X = ", "Y = ");
-                    playerBinBox1.Visibility = Visibility.Visible;
-                    playerBinBox2.Visibility = Visibility.Visible;
+
+                    playerBinBox1.Visibility = (playerBinBox2.Visibility = (evilBinBox1.Visibility = 
+                                               (evilBinBox2.Visibility = Visibility.Visible)));
+
+                    evilBinBox1.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox1.Margin, playerBinBox1.Margin, 15));
+                    evilBinBox2.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox2.Margin, playerBinBox2.Margin, 15));
                     break;
 
                 default:
@@ -593,7 +616,6 @@ namespace CSharp_Labs_WPF
                     break;
 
                 case "Lab 2: Задание 13":
-
                     break;
 
                 default:
@@ -607,8 +629,8 @@ namespace CSharp_Labs_WPF
             taskTextLabel.Content = taskText;
             entryMessageLabel.Content = entryMessage;
             ChangeInputField(v1, v2, v3);
-            playerBinBox1.Visibility = Visibility.Hidden;
-            playerBinBox2.Visibility = Visibility.Hidden;
+            playerBinBox1.Visibility = (playerBinBox2.Visibility = (evilBinBox1.Visibility =
+                                       (evilBinBox2.Visibility = Visibility.Hidden)));
         }
 
         void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
@@ -617,32 +639,9 @@ namespace CSharp_Labs_WPF
             valueName2.Content = v2;
             valueName3.Content = v3;
 
-            if (v1 != "")
-            {
-                userValue1.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                userValue1.Visibility = Visibility.Hidden;
-            }
-
-            if (v2 != "")
-            {
-                userValue2.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                userValue2.Visibility = Visibility.Hidden;
-            }
-
-            if (v3 != "")
-            {
-                userValue3.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                userValue3.Visibility = Visibility.Hidden;
-            }
+            userValue1.Visibility = VisualChanger.ChangeVisible(v1 != "");
+            userValue2.Visibility = VisualChanger.ChangeVisible(v2 != "");
+            userValue3.Visibility = VisualChanger.ChangeVisible(v3 != "");
 
             resultLabel.RenderTransform = new TranslateTransform();
             if (v3 != "")
@@ -671,46 +670,14 @@ namespace CSharp_Labs_WPF
             if (e.Key == Key.D && task == "Lab 2: Задание 13")
             {
                 binaryAttack.Plus();
-                playerBinBox1.Visibility = Visibility.Visible;
-                playerBinBox2.Visibility = Visibility.Visible;
-                if (binaryAttack.X)
-                {
-                    playerBinBox1.Fill = Brushes.Green;
-                }
-                else 
-                {
-                    playerBinBox1.Fill = Brushes.Black;
-                }
-                if (binaryAttack.Y)
-                {
-                    playerBinBox2.Fill = Brushes.Green;
-                }
-                else
-                {
-                    playerBinBox2.Fill = Brushes.Black;
-                }
+                playerBinBox1.Fill = VisualChanger.ChangeColor(binaryAttack.X);
+                playerBinBox2.Fill = VisualChanger.ChangeColor(binaryAttack.Y);
             }
             if (e.Key == Key.A && task == "Lab 2: Задание 13")
             {
                 binaryAttack.Minus();
-                playerBinBox1.Visibility = Visibility.Visible;
-                playerBinBox2.Visibility = Visibility.Visible;
-                if (binaryAttack.X)
-                {
-                    playerBinBox1.Fill = Brushes.Green;
-                }
-                else
-                {
-                    playerBinBox1.Fill = Brushes.Black;
-                }
-                if (binaryAttack.Y)
-                {
-                    playerBinBox2.Fill = Brushes.Green;
-                }
-                else
-                {
-                    playerBinBox2.Fill = Brushes.Black;
-                }
+                playerBinBox1.Fill = VisualChanger.ChangeColor(binaryAttack.X);
+                playerBinBox2.Fill = VisualChanger.ChangeColor(binaryAttack.Y);
             }
             resultLabel.Content = binaryAttack.ToString();
         }

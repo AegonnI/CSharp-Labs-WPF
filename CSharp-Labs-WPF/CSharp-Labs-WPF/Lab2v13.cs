@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 
 namespace CSharp_Labs_WPF
 {
-    public class Lab2_13
+    public class Lab2v13
     {
         public bool X;
         public bool Y;
 
-        public Lab2_13()
+        public Lab2v13()
         {
-            X = false;
-            Y = false;
+            X = (Y = false);
         }
 
-        public Lab2_13(bool x, bool y)
+        public Lab2v13(bool x, bool y)
         {
             X = x;
             Y = y;

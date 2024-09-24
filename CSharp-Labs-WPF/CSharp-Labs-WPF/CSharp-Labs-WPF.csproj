@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Lab2v12Extended.cs" />
+    <Compile Include="VisualChanger.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,8 +65,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ChildOfLab2-13.cs" />
-    <Compile Include="Lab2-13.cs" />
+    <Compile Include="BinaryAttack.cs" />
+    <Compile Include="Lab2v13.cs" />
     <Compile Include="LabChecker.cs" />
     <Compile Include="LabConverter.cs" />
     <Compile Include="LabMath.cs" />
