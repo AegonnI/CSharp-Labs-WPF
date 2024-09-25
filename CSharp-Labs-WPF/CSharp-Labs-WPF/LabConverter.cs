@@ -29,5 +29,18 @@ namespace CSharp_Labs_WPF
 
             return result.Substring(0, result.Length - 1);
         }
+
+        public static bool StringToBool(string x)
+        {
+            if (x == "1")
+            {
+                return true;
+            }
+            if (x == "0")
+            {
+                return false;
+            }
+            return bool.Parse(x);
+        }
     }
 }

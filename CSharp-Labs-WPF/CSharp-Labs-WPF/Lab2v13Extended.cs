@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace CSharp_Labs_WPF
 {
-    public class Lab2v12Extended : Lab2v13
+    public class Lab2v13Extended : Lab2v13
     {
         public bool Z;
 
-        public Lab2v12Extended() : base()
+        public Lab2v13Extended() : base()
         {
             Z = false;
         }
 
-        public Lab2v12Extended(bool x, bool y, bool z) : base(x, y)
+        public Lab2v13Extended(bool x, bool y, bool z) : base(x, y)
         {
             Z = z;
         }
 
         public bool ExtendedImplication()
         {
-            return !X || Y;
+            return !Implication() || Z;
         }
 
         public override string ToString()

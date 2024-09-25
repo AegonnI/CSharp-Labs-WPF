@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,8 +40,8 @@ namespace CSharp_Labs_WPF
             playerBinBox1 = InitRectangle("playerBinBox1", 50, 50, 100, 200, Brushes.Green);
             playerBinBox2 = InitRectangle("playerBinBox2", 50, 50, 220, 200, Brushes.Green);
 
-            evilBinBox1 = InitRectangle("evilBinBox1", 50, 50, 100, 0, Brushes.Green);
-            evilBinBox2 = InitRectangle("evilBinBox2", 50, 50, 220, 0, Brushes.Green);
+            evilBinBox1 = InitRectangle("evilBinBox1", 50, 50, 100, 0, Brushes.Black);
+            evilBinBox2 = InitRectangle("evilBinBox2", 50, 50, 220, 0, Brushes.Black);
         }
 
         ThicknessAnimation EvilBinAnim(Thickness from, Thickness to, double fromSeconds)
@@ -477,13 +478,27 @@ namespace CSharp_Labs_WPF
 
                          "Введите булевые значения",
 
-                         "X = ", "Y = ");
+                         "X = ", "Y = ", "Z = ");
 
                     playerBinBox1.Visibility = (playerBinBox2.Visibility = (evilBinBox1.Visibility = 
                                                (evilBinBox2.Visibility = Visibility.Visible)));
 
                     evilBinBox1.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox1.Margin, playerBinBox1.Margin, 15));
                     evilBinBox2.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox2.Margin, playerBinBox2.Margin, 15));
+                    Task.Run(() =>
+                    {
+                        // Долгая операция
+                        Thread.Sleep(15*1000); // Симуляция задержки
+
+                        // Обновляем UI после завершения операции
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            if (binaryAttack.X != binaryAttack.evilX && binaryAttack.Y != binaryAttack.evilY)
+                                resultLabel.Content = "win";
+                            else
+                                resultLabel.Content = "loose";
+                        });
+                    });
                     break;
 
                 default:
@@ -616,6 +631,21 @@ namespace CSharp_Labs_WPF
                     break;
 
                 case "Lab 2: Задание 13":
+                    if (LabChecker.IsBool(userValue1.Text) && LabChecker.IsBool(userValue2.Text))
+                    {
+                        Lab2v13 bools = new Lab2v13(LabConverter.StringToBool(userValue1.Text), LabConverter.StringToBool(userValue2.Text));
+                        Lab2v13Extended boolsEx = new Lab2v13Extended(LabConverter.StringToBool(userValue1.Text), LabConverter.StringToBool(userValue2.Text),LabConverter.StringToBool(userValue3.Text));
+                        
+                        resultLabel.Content = "Implication = " + bools.Implication().ToString();
+                        resultLabel.Content += "\nToSring = " + bools.ToString();
+
+                        resultLabel.Content += "\nImplication2 = " + boolsEx.ExtendedImplication().ToString();
+                        resultLabel.Content += "\nToSring = " + boolsEx.ToString();
+                    }
+                    else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
                     break;
 
                 default:
@@ -679,7 +709,7 @@ namespace CSharp_Labs_WPF
                 playerBinBox1.Fill = VisualChanger.ChangeColor(binaryAttack.X);
                 playerBinBox2.Fill = VisualChanger.ChangeColor(binaryAttack.Y);
             }
-            resultLabel.Content = binaryAttack.ToString();
+            //resultLabel.Content = binaryAttack.ToString();
         }
     }
 }

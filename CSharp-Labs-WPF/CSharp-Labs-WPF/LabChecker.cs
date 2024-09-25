@@ -60,5 +60,10 @@ namespace CSharp_Labs_WPF
             return IsIntArray(arr) && IsIntNumber(pos)
                 && int.Parse(pos) <= arr.Length && int.Parse(pos) >= 0;
         }
+
+        public static bool IsBool(string x)
+        {           
+            return (x == "1") || (x == "0") || bool.TryParse(x, out var result);
+        }
     }
 }
