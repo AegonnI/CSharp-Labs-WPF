@@ -652,8 +652,8 @@ namespace CSharp_Labs_WPF
 
                         Lab2v13Extended boolsEx = new Lab2v13Extended(bools, LabConverter.StringToBool(userValue3.Text));
                         
-                        resultLabel.Content += "\nImplication2 = " + boolsEx.ExtendedImplication().ToString();
-                        resultLabel.Content += "\nToSring = " + boolsEx.ToString();
+                        resultLabel.Content += "\n\nImplication2 = " + boolsEx.ExtendedImplication().ToString();
+                        resultLabel.Content += "\nToSring2 = " + boolsEx.ToString();
                     }
                     else
                     {
