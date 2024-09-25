@@ -32,16 +32,28 @@ namespace CSharp_Labs_WPF
         public Rectangle evilBinBox1;
         public Rectangle evilBinBox2;
 
+        private int timeToMove = 3;
+        private int cubeSize = 20;
+        private double marginX = 100;
+        private double marginY = 200;
+        private double deltaX = 50;
+        private double deltaY = -200;
+        private bool gameStarted = false;
+
         public MainWindow()
         {
             InitializeComponent();
             binaryAttack = new BinaryAttack();
 
-            playerBinBox1 = InitRectangle("playerBinBox1", 50, 50, 100, 200, Brushes.Green);
-            playerBinBox2 = InitRectangle("playerBinBox2", 50, 50, 220, 200, Brushes.Green);
 
-            evilBinBox1 = InitRectangle("evilBinBox1", 50, 50, 100, 0, Brushes.Black);
-            evilBinBox2 = InitRectangle("evilBinBox2", 50, 50, 220, 0, Brushes.Black);
+            playerBinBox1 = InitRectangle("playerBinBox1", cubeSize, cubeSize, marginX, marginY, Brushes.Green);
+            playerBinBox2 = InitRectangle("playerBinBox2", cubeSize, cubeSize, marginX + deltaX, marginY, Brushes.Green);
+
+            evilBinBox1 = InitRectangle("evilBinBox1", cubeSize, cubeSize, marginX, marginY + deltaY, Brushes.Green);
+            evilBinBox2 = InitRectangle("evilBinBox2", cubeSize, cubeSize, marginX + deltaX, marginY + deltaY, Brushes.Green);
+            GenEvilBin();
+
+
         }
 
         ThicknessAnimation EvilBinAnim(Thickness from, Thickness to, double fromSeconds)
@@ -483,22 +495,22 @@ namespace CSharp_Labs_WPF
                     playerBinBox1.Visibility = (playerBinBox2.Visibility = (evilBinBox1.Visibility = 
                                                (evilBinBox2.Visibility = Visibility.Visible)));
 
-                    evilBinBox1.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox1.Margin, playerBinBox1.Margin, 15));
-                    evilBinBox2.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox2.Margin, playerBinBox2.Margin, 15));
-                    Task.Run(() =>
-                    {
-                        // Долгая операция
-                        Thread.Sleep(15*1000); // Симуляция задержки
+                    //evilBinBox1.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox1.Margin, playerBinBox1.Margin, timeToMove));
+                    //evilBinBox2.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox2.Margin, playerBinBox2.Margin, timeToMove));
+                    //Task.Run(() =>
+                    //{
+                    //    // Долгая операция
+                    //    Thread.Sleep(timeToMove * 1000); // Симуляция задержки
 
-                        // Обновляем UI после завершения операции
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            if (binaryAttack.X != binaryAttack.evilX && binaryAttack.Y != binaryAttack.evilY)
-                                resultLabel.Content = "win";
-                            else
-                                resultLabel.Content = "loose";
-                        });
-                    });
+                    //    // Обновляем UI после завершения операции
+                    //    Application.Current.Dispatcher.Invoke(() =>
+                    //    {
+                    //        if (binaryAttack.X != binaryAttack.evilX && binaryAttack.Y != binaryAttack.evilY)
+                    //            resultLabel.Content = "win";
+                    //        else
+                    //            resultLabel.Content = "loose";
+                    //    });
+                    //});
                     break;
 
                 default:
@@ -634,11 +646,12 @@ namespace CSharp_Labs_WPF
                     if (LabChecker.IsBool(userValue1.Text) && LabChecker.IsBool(userValue2.Text))
                     {
                         Lab2v13 bools = new Lab2v13(LabConverter.StringToBool(userValue1.Text), LabConverter.StringToBool(userValue2.Text));
-                        Lab2v13Extended boolsEx = new Lab2v13Extended(LabConverter.StringToBool(userValue1.Text), LabConverter.StringToBool(userValue2.Text),LabConverter.StringToBool(userValue3.Text));
-                        
+
                         resultLabel.Content = "Implication = " + bools.Implication().ToString();
                         resultLabel.Content += "\nToSring = " + bools.ToString();
 
+                        Lab2v13Extended boolsEx = new Lab2v13Extended(bools, LabConverter.StringToBool(userValue3.Text));
+                        
                         resultLabel.Content += "\nImplication2 = " + boolsEx.ExtendedImplication().ToString();
                         resultLabel.Content += "\nToSring = " + boolsEx.ToString();
                     }
@@ -709,7 +722,66 @@ namespace CSharp_Labs_WPF
                 playerBinBox1.Fill = VisualChanger.ChangeColor(binaryAttack.X);
                 playerBinBox2.Fill = VisualChanger.ChangeColor(binaryAttack.Y);
             }
-            //resultLabel.Content = binaryAttack.ToString();
+            if (e.Key == Key.Enter && task == "Lab 2: Задание 13" && !gameStarted)
+            {
+                gameStarted = true;
+                evilBinBox1.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox1.Margin, playerBinBox1.Margin, timeToMove));
+                evilBinBox2.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox2.Margin, playerBinBox2.Margin, timeToMove));
+                CollisionEvent();
+            }
+            if (e.Key == Key.Escape && task == "Lab 2: Задание 13" && gameStarted)
+            {
+                gameStarted = false;
+            }
+        }
+
+        void CollisionEvent()
+        {
+            Task.Run(() =>
+            {
+                Thread.Sleep(timeToMove * 1000); // Симуляция задержки
+
+                // Обновляем UI после завершения операции
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (binaryAttack.X != binaryAttack.evilX && binaryAttack.Y != binaryAttack.evilY)
+                    {
+                    }
+                    else
+                    {
+                    }
+                    GenEvilBin();
+                    evilBinBox1.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox1.Margin, new Thickness(marginX, marginY + deltaY, 0, 0), 0));
+                    evilBinBox2.BeginAnimation(Rectangle.MarginProperty, EvilBinAnim(evilBinBox2.Margin, new Thickness(marginX + deltaX, marginY + deltaY, 0, 0), 0));
+                    gameStarted = false;
+                });
+            });
+        }
+
+        void GenEvilBin()
+        {
+            Random rand = new Random();
+            if (rand.Next(2) == 1)
+            {
+                evilBinBox1.Fill = Brushes.Green;
+                binaryAttack.evilX = true;
+            }
+            else
+            {
+                evilBinBox1.Fill = Brushes.Black;
+                binaryAttack.evilX = false;
+
+            }
+            if (rand.Next(2) == 1)
+            {
+                evilBinBox2.Fill = Brushes.Green;
+                binaryAttack.evilY = true;
+            }
+            else
+            {
+                evilBinBox2.Fill = Brushes.Black;
+                binaryAttack.evilY = false;
+            }
         }
     }
 }

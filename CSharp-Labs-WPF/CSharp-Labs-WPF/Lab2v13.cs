@@ -22,6 +22,12 @@ namespace CSharp_Labs_WPF
             Y = y;
         }
 
+        public Lab2v13(Lab2v13 o)
+        {
+            X = o.X;
+            Y = o.Y;
+        }
+
         public bool Implication()
         {
             return !X || Y;

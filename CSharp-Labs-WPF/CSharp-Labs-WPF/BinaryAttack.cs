@@ -16,6 +16,18 @@ namespace CSharp_Labs_WPF
             evilX = (evilY = false);
         }
 
+        public BinaryAttack(bool evilX, bool evilY)
+        {
+            this.evilX = evilX;
+            this.evilY = evilY;
+        }
+
+        public BinaryAttack(bool x, bool y, bool evilX, bool evilY) : base(x, y)
+        {
+            this.evilX = evilX;
+            this.evilY = evilY;
+        }
+
         public void Plus()
         {
             X = X != Y;

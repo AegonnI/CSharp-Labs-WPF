@@ -20,6 +20,16 @@ namespace CSharp_Labs_WPF
             Z = z;
         }
 
+        public Lab2v13Extended(Lab2v13Extended o) : base(o.X, o.Y)
+        {
+            Z = o.Z;
+        }
+
+        public Lab2v13Extended(Lab2v13 o, bool z) : base(o)
+        {
+            Z = z;
+        }
+
         public bool ExtendedImplication()
         {
             return !Implication() || Z;
