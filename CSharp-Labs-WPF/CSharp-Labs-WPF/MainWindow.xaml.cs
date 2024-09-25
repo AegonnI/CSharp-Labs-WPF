@@ -731,7 +731,7 @@ namespace CSharp_Labs_WPF
             }
             if (e.Key == Key.Escape && task == "Lab 2: Задание 13" && gameStarted)
             {
-                gameStarted = false;
+                gameStarted = false;              
             }
         }
 
