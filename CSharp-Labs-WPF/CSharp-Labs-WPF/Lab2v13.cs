@@ -8,34 +8,46 @@ namespace CSharp_Labs_WPF
 {
     public class Lab2v13
     {
-        public bool X;
-        public bool Y;
+        protected bool x;
+        protected bool y;
 
         public Lab2v13()
         {
-            X = (Y = false);
+            x = (y = false);
         }
 
         public Lab2v13(bool x, bool y)
         {
-            X = x;
-            Y = y;
+            this.x = x;
+            this.y = y;
         }
 
         public Lab2v13(Lab2v13 o)
         {
-            X = o.X;
-            Y = o.Y;
+            x = o.x;
+            y = o.Y;
         }
 
         public bool Implication()
         {
-            return !X || Y;
+            return !x || y;
         }
 
         public override string ToString()
         {
-            return X.ToString() + " " + Y.ToString();
+            return x.ToString() + " " + y.ToString();
+        }
+
+        public bool X
+        {
+            set { x = value; }
+            get { return x;}
+        }
+
+        public bool Y
+        {
+            set { y = value; }
+            get { return y; }
         }
     }
 }

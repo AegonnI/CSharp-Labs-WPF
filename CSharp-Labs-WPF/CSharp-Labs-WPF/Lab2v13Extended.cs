@@ -8,36 +8,36 @@ namespace CSharp_Labs_WPF
 {
     public class Lab2v13Extended : Lab2v13
     {
-        public bool Z;
+        public bool z;
 
         public Lab2v13Extended() : base()
         {
-            Z = false;
+            z = false;
         }
 
         public Lab2v13Extended(bool x, bool y, bool z) : base(x, y)
         {
-            Z = z;
+            this.z = z;
         }
 
-        public Lab2v13Extended(Lab2v13Extended o) : base(o.X, o.Y)
+        public Lab2v13Extended(Lab2v13Extended o) : base(o.x, o.Y)
         {
-            Z = o.Z;
+            z = o.z;
         }
 
         public Lab2v13Extended(Lab2v13 o, bool z) : base(o)
         {
-            Z = z;
+            this.z = z;
         }
 
         public bool ExtendedImplication()
         {
-            return !Implication() || Z;
+            return !Implication() || z;
         }
 
         public override string ToString()
         {
-            return X.ToString() + " " + Y.ToString() + " " + Z.ToString();
+            return x.ToString() + " " + Y.ToString() + " " + z.ToString();
         }
     }
 }
