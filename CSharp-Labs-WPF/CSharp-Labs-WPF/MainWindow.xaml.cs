@@ -445,7 +445,7 @@ namespace CSharp_Labs_WPF
 
                          "Введите неотрицательные значения рублей и копеек",
 
-                         "rubles = ", "kopeks = ");
+                         "rubles = ", "kopeks = ", "minus kopeks = ");
                     break;
 
                 default:
@@ -589,6 +589,20 @@ namespace CSharp_Labs_WPF
                         
                         resultLabel.Content += "\n\nImplication2 = " + boolsEx.ExtendedImplication().ToString();
                         resultLabel.Content += "\nToSring2 = " + boolsEx.ToString();
+                    }
+                    else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 3: Задание 1":
+                    if (LabChecker.IsUint(userValue1.Text) && LabChecker.IsByte(userValue2.Text) && LabChecker.IsUint(userValue3.Text))
+                    {
+                        Money money = new Money(uint.Parse(userValue1.Text), byte.Parse(userValue2.Text));
+
+                        resultLabel.Content = "ToString = " + money.ToString();
+                        resultLabel.Content += "\noverload '-' = " + (money - uint.Parse(userValue3.Text)).ToString();
                     }
                     else
                     {

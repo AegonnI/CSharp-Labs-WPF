@@ -65,5 +65,15 @@ namespace CSharp_Labs_WPF
         {           
             return (x == "1") || (x == "0") || bool.TryParse(x, out var result);
         }
+
+        public static bool IsUint(string number)
+        {
+            return uint.TryParse(number, out var result) && !(number[0] == '0' && number.Length != 1);
+        }
+
+        public static bool IsByte(string number)
+        {
+            return byte.TryParse(number, out var result) && !(number[0] == '0' && number.Length != 1);
+        }
     }
 }
