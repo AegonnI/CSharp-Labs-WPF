@@ -38,10 +38,56 @@ namespace CSharp_Labs_WPF
         {
             if (money.rubles * 100 + money.kopeks > kopeks)
             {
-                double d = (money.rubles * 100 + money.kopeks - kopeks) / 100;
-                return new Money((uint)Math.Floor(d), (byte)(d - Math.Floor(d)));
+                return new Money((100 * money.rubles + money.kopeks - kopeks) / 100, 
+                           (byte)(100 * LabMath.fraction((decimal)(money.rubles * 100 + money.kopeks - kopeks) / 100)));
             }
-            return new Money(money.rubles, money.kopeks);
+            return new Money(0, 0);
+        }
+
+        public static Money operator -(uint kopeks, Money money)
+        {
+            if (money.rubles * 100 + money.kopeks < kopeks)
+            {
+                return new Money((kopeks - 100 * money.rubles + money.kopeks) / 100,
+                           (byte)(100 * LabMath.fraction((decimal)(kopeks - 100 * money.rubles + money.kopeks) / 100)));
+            }
+            return new Money(0, 0);
+        }
+
+        public static Money operator -(Money money1, Money money2)
+        {
+            if (100 * money1.rubles + money1.kopeks > 100 * money2.rubles + money2.kopeks)
+            {
+                return new Money((100 * (money1.rubles - money2.rubles) + money1.kopeks - money2.kopeks) / 100,
+                           (byte)(100 * LabMath.fraction((decimal)(100 * (money1.rubles - money2.rubles) + money1.kopeks - money2.kopeks) / 100)));
+            }
+            return new Money(0, 0);
+        }
+
+        public static Money operator +(Money money, uint kopeks)
+        {
+            return new Money((100 * money.rubles + money.kopeks + kopeks) / 100,
+                       (byte)(100 * LabMath.fraction((decimal)(money.rubles * 100 + money.kopeks + kopeks) / 100)));
+        }
+
+        public static Money operator --(Money money)
+        {
+            return money - 1;
+        }
+
+        public static Money operator ++(Money money)
+        {
+            return money + 1;
+        }
+
+        public static explicit operator uint(Money money)
+        {
+            return money.rubles;
+        }
+
+        public static implicit operator bool(Money money)
+        {
+            return money.rubles != 0 || money.kopeks != 0;
         }
     }
 }

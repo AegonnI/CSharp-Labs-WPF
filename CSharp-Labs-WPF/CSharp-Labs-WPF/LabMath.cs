@@ -27,6 +27,11 @@ namespace CSharp_Labs_WPF
             return (double)((decimal)(x) - Math.Truncate((decimal)(x)));
         }
 
+        public static decimal fraction(decimal x)
+        {
+            return x - Math.Truncate(x);
+        }
+
         // Lab1 Ex1-3
 
         public static int charToNum(char x)

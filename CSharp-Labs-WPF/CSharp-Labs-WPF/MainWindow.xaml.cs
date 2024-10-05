@@ -601,8 +601,19 @@ namespace CSharp_Labs_WPF
                     {
                         Money money = new Money(uint.Parse(userValue1.Text), byte.Parse(userValue2.Text));
 
-                        resultLabel.Content = "ToString = " + money.ToString();
-                        resultLabel.Content += "\noverload '-' = " + (money - uint.Parse(userValue3.Text)).ToString();
+                        resultLabel.Content = "ToString: " + money.ToString();
+                        resultLabel.Content += "\noverload '+': " + (money + uint.Parse(userValue3.Text)).ToString();
+                        resultLabel.Content += "\noverload '-' (Money - m): " + (money - uint.Parse(userValue3.Text)).ToString();
+                        resultLabel.Content += "\noverload '-' (m - Money): " + (uint.Parse(userValue3.Text) - money).ToString();
+                        {
+                            Random rand = new Random();
+                            uint r1 = (uint)rand.Next(0, 100); byte r2 = (byte)rand.Next(0, 99);
+                            resultLabel.Content += $"\noverload '-' (Money1 - Money2({r1}, {r2})): " + (money - new Money(r1, r2)).ToString();
+                        }                        
+                        resultLabel.Content += "\noverload '++': " + (++money).ToString();
+                        resultLabel.Content += "\noverload '--': " + (--money).ToString();
+                        resultLabel.Content += "\nexplicit uint: " + ((uint)money).ToString();
+                        resultLabel.Content += "\nimplicit bool: " + (money == true).ToString();
                     }
                     else
                     {
