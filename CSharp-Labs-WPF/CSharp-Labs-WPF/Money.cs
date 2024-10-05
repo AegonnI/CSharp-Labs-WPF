@@ -8,10 +8,10 @@ namespace CSharp_Labs_WPF
 {
     internal class Money
     {
-        uint rubles;
-        byte kopeks;
+        private uint rubles;
+        private byte kopeks;
 
-        public Money()
+        public Money() // Конструктор по умолчанию
         {
             rubles = 0;
             kopeks = 0;
@@ -23,17 +23,18 @@ namespace CSharp_Labs_WPF
             this.kopeks = kopeks;
         }
 
-        public Money(Money money)
+        public Money(Money money) // Конструктор копирования
         {
             rubles = money.rubles;
             kopeks = money.kopeks;
         }
 
-        public override string ToString()
+        public override string ToString() //перегруженный ToString(), возвращает рубли и копейки
         {
             return $"rubles = {rubles}, kopeks = {kopeks}";
         }
 
+        //перегрузка оператора вычитания, возвращает объект типа Money
         public static Money operator -(Money money, uint kopeks)
         {
             if (money.rubles * 100 + money.kopeks > kopeks)
@@ -43,7 +44,6 @@ namespace CSharp_Labs_WPF
             }
             return new Money(0, 0);
         }
-
         public static Money operator -(uint kopeks, Money money)
         {
             if (money.rubles * 100 + money.kopeks < kopeks)
@@ -53,7 +53,6 @@ namespace CSharp_Labs_WPF
             }
             return new Money(0, 0);
         }
-
         public static Money operator -(Money money1, Money money2)
         {
             if (100 * money1.rubles + money1.kopeks > 100 * money2.rubles + money2.kopeks)
@@ -64,30 +63,42 @@ namespace CSharp_Labs_WPF
             return new Money(0, 0);
         }
 
+        //перегрузка оператора сложения, возвращает объект типа Money
         public static Money operator +(Money money, uint kopeks)
         {
             return new Money((100 * money.rubles + money.kopeks + kopeks) / 100,
                        (byte)(100 * LabMath.fraction((decimal)(money.rubles * 100 + money.kopeks + kopeks) / 100)));
         }
 
+        //перегрузка унарных операторов -- и ++, возвращает объект типа Money
         public static Money operator --(Money money)
         {
             return money - 1;
         }
-
         public static Money operator ++(Money money)
         {
             return money + 1;
         }
 
-        public static explicit operator uint(Money money)
+        
+        public static explicit operator uint(Money money) //явное преобразование в тип uint, возвращает рубли
         {
             return money.rubles;
-        }
-
-        public static implicit operator bool(Money money)
+        } 
+        public static implicit operator bool(Money money) //неявное преобразование в тип bool, вовзращает true если деньги есть
         {
             return money.rubles != 0 || money.kopeks != 0;
+        }
+
+        // Геттеры
+        public uint Rubles
+        {
+            get { return rubles; }
+        }
+
+        public byte Kopeks
+        {
+            get { return kopeks; }
         }
     }
 }
