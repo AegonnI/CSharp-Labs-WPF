@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -30,11 +32,245 @@ namespace CSharp_Labs_WPF
         public MainWindow()
         {
             InitializeComponent();
+            if (File.Exists("data.dat"))
+            {
+                var f = new StreamReader("data.dat");
+                task = f.ReadLine();
+                f.Close();
+            }
+            tasksComboBox.Text = task;
+            TaskChooser();
         }
 
         private void Tasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             task = tasksComboBox.SelectedItem.ToString().Substring(38);
+            TaskChooser();
+        }
+
+        private void Show_Result_Click(object sender, RoutedEventArgs e)
+        {
+            switch (task)
+            {
+                case "Lab 1: Задание 1. Методы: 1":
+                    ResultText(
+                        () => LabChecker.IsDoubleNumber(userValue1.Text) && LabChecker.IsDecimalNumber(userValue1.Text),
+                        () => LabMath.fraction(double.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 1. Методы: 3":
+                    ResultText(
+                        () => LabChecker.IsCharADigit(userValue1.Text),
+                        () => LabMath.charToNum(char.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 1. Методы: 5":
+                    ResultText(
+                        () => LabChecker.IsIntNumber(userValue1.Text),
+                        () => LabMath.is2Digits(int.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 1. Методы: 7":
+                    ResultText(
+                        () => LabChecker.IsIntNumber(userValue1.Text) && LabChecker.IsIntNumber(userValue2.Text) && LabChecker.IsIntNumber(userValue3.Text),
+                        () => LabMath.isInRange(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 1. Методы: 9":
+                    ResultText(
+                        () => LabChecker.IsIntNumber(userValue1.Text) && LabChecker.IsIntNumber(userValue2.Text) && LabChecker.IsIntNumber(userValue3.Text),
+                        () => LabMath.isEqual(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 2. Условия: 1":
+                    ResultText(
+                        () => LabChecker.IsIntNumber(userValue1.Text),
+                        () => LabMath.abs(int.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 2. Условия: 3":
+                    ResultText(
+                        () => LabChecker.IsIntNumber(userValue1.Text),
+                        () => LabMath.is35(int.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 2. Условия: 5":
+                    ResultText(
+                        () => LabChecker.IsIntNumber(userValue1.Text) && LabChecker.IsIntNumber(userValue2.Text) && LabChecker.IsIntNumber(userValue3.Text),
+                        () => LabMath.max3(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 2. Условия: 7":
+                    ResultText(
+                        () => LabChecker.IsIntNumber(userValue1.Text) && LabChecker.IsIntNumber(userValue2.Text),
+                        () => LabMath.sum2(int.Parse(userValue1.Text), int.Parse(userValue2.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 2. Условия: 9":
+                    ResultText(
+                        () => LabChecker.IsIntNumber(userValue1.Text),
+                        () => LabMath.day(int.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 3. Циклы: 1":
+                    ResultText(
+                        () => LabChecker.IsPosetiveOfZeroInt(userValue1.Text),
+                        () => LabMath.listNums(int.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 3. Циклы: 3":
+                    ResultText(
+                        () => LabChecker.IsPosetiveOfZeroInt(userValue1.Text),
+                        () => LabMath.chet(int.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 3. Циклы: 5":
+                    ResultText(
+                        () => LabChecker.IsLongNumber(userValue1.Text),
+                        () => LabMath.numLen(long.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 3. Циклы: 7":
+                    ResultText(
+                        () => LabChecker.IsPosetiveOfZeroInt(userValue1.Text),
+                        () => LabMath.square(int.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 3. Циклы: 9":
+                    ResultText(
+                        () => LabChecker.IsPosetiveOfZeroInt(userValue1.Text),
+                        () => LabMath.rightTriangle(int.Parse(userValue1.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 4. Массивы: 1":
+                    ResultText(
+                        () => LabChecker.IsIntArray(userValue1.Text.Split(' ')) && LabChecker.IsIntNumber(userValue2.Text),
+                        () => LabMath.findFirst(LabConverter.StringToIntArr(userValue1.Text.Split(' ')), int.Parse(userValue2.Text)).ToString());
+                    break;
+
+                case "Lab 1: Задание 4. Массивы: 3":
+                    ResultText(
+                        () => LabChecker.IsIntArray(userValue1.Text.Split(' ')),
+                        () => LabMath.maxAbs(LabConverter.StringToIntArr(userValue1.Text.Split(' '))).ToString());
+                    break;
+
+                case "Lab 1: Задание 4. Массивы: 5":
+                    ResultText(
+                        () => LabChecker.IndexNotOutside(userValue1.Text.Split(' '), userValue3.Text) && LabChecker.IsIntArray(userValue2.Text.Split(' ')),
+                        () => LabConverter.IntArrToText(LabMath.add(LabConverter.StringToIntArr(userValue1.Text.Split(' ')), LabConverter.StringToIntArr(userValue2.Text.Split(' ')), int.Parse(userValue3.Text))).ToString());
+                    break;
+
+                case "Lab 1: Задание 4. Массивы: 7":
+                    ResultText(
+                        () => LabChecker.IsIntArray(userValue1.Text.Split(' ')),
+                        () => LabConverter.IntArrToText(LabMath.reverseBack(LabConverter.StringToIntArr(userValue1.Text.Split(' ')))).ToString());
+                    break;
+
+                case "Lab 1: Задание 4. Массивы: 9":
+                    ResultText(
+                        () => LabChecker.IsIntArray(userValue1.Text.Split(' ')) && LabChecker.IsIntNumber(userValue2.Text),
+                        () => LabConverter.IntArrToText(LabMath.findAll(LabConverter.StringToIntArr(userValue1.Text.Split(' ')), int.Parse(userValue2.Text))).ToString());
+                    break;
+
+                case "Lab 2: Задание 13":
+                    if (LabChecker.IsBool(userValue1.Text) && LabChecker.IsBool(userValue2.Text))
+                    {
+                        Lab2v13 bools = new Lab2v13(LabConverter.StringToBool(userValue1.Text), LabConverter.StringToBool(userValue2.Text));
+
+                        resultLabel.Content = "Implication = " + bools.Implication().ToString();
+                        resultLabel.Content += "\nToSring = " + bools.ToString();
+
+                        Lab2v13Extended boolsEx = new Lab2v13Extended(bools, LabConverter.StringToBool(userValue3.Text));
+                        
+                        resultLabel.Content += "\n\nImplication2 = " + boolsEx.ExtendedImplication().ToString();
+                        resultLabel.Content += "\nToSring2 = " + boolsEx.ToString();
+                    }
+                    else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 3: Задание 1":
+                    if (LabChecker.IsUint(userValue1.Text, 9999999) && LabChecker.IsByte(userValue2.Text) && LabChecker.IsUint(userValue3.Text))
+                    {
+                        Money money = new Money(uint.Parse(userValue1.Text), byte.Parse(userValue2.Text));
+
+                        resultLabel.Content = "ToString: " + money.ToString();
+
+                        resultLabel.Content += "\noverload '+': " + (money + uint.Parse(userValue3.Text)).ToString();
+                        resultLabel.Content += "\noverload '-' (Money - m): " + (money - uint.Parse(userValue3.Text)).ToString();
+                        resultLabel.Content += "\noverload '-' (m - Money): " + (uint.Parse(userValue3.Text) - money).ToString();
+                        {
+                            Random rand = new Random();
+                            Money money2 = new Money((uint)rand.Next(0, 100), (byte)rand.Next(0, 99));
+                            resultLabel.Content += $"\noverload '-' (Money1 - Money2({money2.Rubles}, {money2.Kopeks})): " + (money - money2).ToString();
+                        }                        
+                        resultLabel.Content += "\noverload '++': " + (++money).ToString();
+                        resultLabel.Content += "\noverload '--': " + (--money).ToString();
+                        resultLabel.Content += "\nexplicit uint: " + ((uint)money).ToString();
+                        resultLabel.Content += "\nimplicit bool: " + (money == true).ToString();
+                    }
+                    else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        void TaskChanger(string taskName, string taskText, string entryMessage, string v1 = "", string v2 = "", string v3 = "")
+        {
+            taskNameLabel.Content = taskName;
+            taskTextLabel.Content = taskText;
+            entryMessageLabel.Content = entryMessage;
+            ChangeInputField(v1, v2, v3);
+        }
+
+        void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
+        {
+            valueName1.Content = v1;
+            valueName2.Content = v2;
+            valueName3.Content = v3;
+
+            userValue1.Visibility = VisualChanger.ChangeVisible(v1 != "");
+            userValue2.Visibility = VisualChanger.ChangeVisible(v2 != "");
+            userValue3.Visibility = VisualChanger.ChangeVisible(v3 != "");
+
+            resultLabel.RenderTransform = new TranslateTransform();
+            if (v3 != "")
+            {
+                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue3.Margin.Top + 23 - resultLabel.Margin.Top;
+            }
+            else if (v2 != "")
+            {
+                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue2.Margin.Top + 23 - resultLabel.Margin.Top;
+            }
+            else if (v1 != "")
+            {
+                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue1.Margin.Top + 23 - resultLabel.Margin.Top;
+            }
+        }
+
+        void ResultText(Func<bool> checkFunc, Func<string> resultFunc)
+        {
+            resultLabel.Content = LabMath.ResultText(
+                () => checkFunc(),
+                () => resultFunc());
+        }
+
+        void DataWindow_Closing(object sender, CancelEventArgs e)
+        {
+            StreamWriter f = new StreamWriter("data.dat");
+            f.WriteLine(task);
+            f.Close();
+        }
+
+        void TaskChooser()
+        {            
             resultLabel.Content = "";
             userValue1.Text = "";
             userValue2.Text = "";
@@ -436,8 +672,8 @@ namespace CSharp_Labs_WPF
                     TaskChanger("Задание 1",
 
                          "Класс Money" +
-                         "\r\nПоля uint rubles, byte kopeks" +
-                         "\r\nВычитание копеек (uint) из" +
+                         "\r\n\r\nПоля uint rubles, byte kopeks" +
+                         "\r\n\r\nВычитание копеек (uint) из" +
                          "\r\nобъекта типа Money(учесть, что" +
                          "\r\nденежная величина не может" +
                          "\r\nбыть меньше 0).Результат" +
@@ -451,220 +687,6 @@ namespace CSharp_Labs_WPF
                 default:
                     break;
             }
-        }
-
-        private void Show_Result_Click(object sender, RoutedEventArgs e)
-        {
-            switch (task)
-            {
-                case "Lab 1: Задание 1. Методы: 1":
-                    ResultText(
-                        () => LabChecker.IsDoubleNumber(userValue1.Text) && LabChecker.IsDecimalNumber(userValue1.Text),
-                        () => LabMath.fraction(double.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 1. Методы: 3":
-                    ResultText(
-                        () => LabChecker.IsCharADigit(userValue1.Text),
-                        () => LabMath.charToNum(char.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 1. Методы: 5":
-                    ResultText(
-                        () => LabChecker.IsIntNumber(userValue1.Text),
-                        () => LabMath.is2Digits(int.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 1. Методы: 7":
-                    ResultText(
-                        () => LabChecker.IsIntNumber(userValue1.Text) && LabChecker.IsIntNumber(userValue2.Text) && LabChecker.IsIntNumber(userValue3.Text),
-                        () => LabMath.isInRange(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 1. Методы: 9":
-                    ResultText(
-                        () => LabChecker.IsIntNumber(userValue1.Text) && LabChecker.IsIntNumber(userValue2.Text) && LabChecker.IsIntNumber(userValue3.Text),
-                        () => LabMath.isEqual(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 2. Условия: 1":
-                    ResultText(
-                        () => LabChecker.IsIntNumber(userValue1.Text),
-                        () => LabMath.abs(int.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 2. Условия: 3":
-                    ResultText(
-                        () => LabChecker.IsIntNumber(userValue1.Text),
-                        () => LabMath.is35(int.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 2. Условия: 5":
-                    ResultText(
-                        () => LabChecker.IsIntNumber(userValue1.Text) && LabChecker.IsIntNumber(userValue2.Text) && LabChecker.IsIntNumber(userValue3.Text),
-                        () => LabMath.max3(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 2. Условия: 7":
-                    ResultText(
-                        () => LabChecker.IsIntNumber(userValue1.Text) && LabChecker.IsIntNumber(userValue2.Text),
-                        () => LabMath.sum2(int.Parse(userValue1.Text), int.Parse(userValue2.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 2. Условия: 9":
-                    ResultText(
-                        () => LabChecker.IsIntNumber(userValue1.Text),
-                        () => LabMath.day(int.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 3. Циклы: 1":
-                    ResultText(
-                        () => LabChecker.IsPosetiveOfZeroInt(userValue1.Text),
-                        () => LabMath.listNums(int.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 3. Циклы: 3":
-                    ResultText(
-                        () => LabChecker.IsPosetiveOfZeroInt(userValue1.Text),
-                        () => LabMath.chet(int.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 3. Циклы: 5":
-                    ResultText(
-                        () => LabChecker.IsLongNumber(userValue1.Text),
-                        () => LabMath.numLen(long.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 3. Циклы: 7":
-                    ResultText(
-                        () => LabChecker.IsPosetiveOfZeroInt(userValue1.Text),
-                        () => LabMath.square(int.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 3. Циклы: 9":
-                    ResultText(
-                        () => LabChecker.IsPosetiveOfZeroInt(userValue1.Text),
-                        () => LabMath.rightTriangle(int.Parse(userValue1.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 4. Массивы: 1":
-                    ResultText(
-                        () => LabChecker.IsIntArray(userValue1.Text.Split(' ')) && LabChecker.IsIntNumber(userValue2.Text),
-                        () => LabMath.findFirst(LabConverter.StringToIntArr(userValue1.Text.Split(' ')), int.Parse(userValue2.Text)).ToString());
-                    break;
-
-                case "Lab 1: Задание 4. Массивы: 3":
-                    ResultText(
-                        () => LabChecker.IsIntArray(userValue1.Text.Split(' ')),
-                        () => LabMath.maxAbs(LabConverter.StringToIntArr(userValue1.Text.Split(' '))).ToString());
-                    break;
-
-                case "Lab 1: Задание 4. Массивы: 5":
-                    ResultText(
-                        () => LabChecker.IndexNotOutside(userValue1.Text.Split(' '), userValue3.Text) && LabChecker.IsIntArray(userValue2.Text.Split(' ')),
-                        () => LabConverter.IntArrToText(LabMath.add(LabConverter.StringToIntArr(userValue1.Text.Split(' ')), LabConverter.StringToIntArr(userValue2.Text.Split(' ')), int.Parse(userValue3.Text))).ToString());
-                    break;
-
-                case "Lab 1: Задание 4. Массивы: 7":
-                    ResultText(
-                        () => LabChecker.IsIntArray(userValue1.Text.Split(' ')),
-                        () => LabConverter.IntArrToText(LabMath.reverseBack(LabConverter.StringToIntArr(userValue1.Text.Split(' ')))).ToString());
-                    break;
-
-                case "Lab 1: Задание 4. Массивы: 9":
-                    ResultText(
-                        () => LabChecker.IsIntArray(userValue1.Text.Split(' ')) && LabChecker.IsIntNumber(userValue2.Text),
-                        () => LabConverter.IntArrToText(LabMath.findAll(LabConverter.StringToIntArr(userValue1.Text.Split(' ')), int.Parse(userValue2.Text))).ToString());
-                    break;
-
-                case "Lab 2: Задание 13":
-                    if (LabChecker.IsBool(userValue1.Text) && LabChecker.IsBool(userValue2.Text))
-                    {
-                        Lab2v13 bools = new Lab2v13(LabConverter.StringToBool(userValue1.Text), LabConverter.StringToBool(userValue2.Text));
-
-                        resultLabel.Content = "Implication = " + bools.Implication().ToString();
-                        resultLabel.Content += "\nToSring = " + bools.ToString();
-
-                        Lab2v13Extended boolsEx = new Lab2v13Extended(bools, LabConverter.StringToBool(userValue3.Text));
-                        
-                        resultLabel.Content += "\n\nImplication2 = " + boolsEx.ExtendedImplication().ToString();
-                        resultLabel.Content += "\nToSring2 = " + boolsEx.ToString();
-                    }
-                    else
-                    {
-                        resultLabel.Content = "Incorrect input, try again!";
-                    }
-                    break;
-
-                case "Lab 3: Задание 1":
-                    if (LabChecker.IsUint(userValue1.Text) && LabChecker.IsByte(userValue2.Text) && LabChecker.IsUint(userValue3.Text))
-                    {
-                        Money money = new Money(uint.Parse(userValue1.Text), byte.Parse(userValue2.Text));
-
-                        resultLabel.Content = "ToString: " + money.ToString();
-
-                        resultLabel.Content += "\noverload '+': " + (money + uint.Parse(userValue3.Text)).ToString();
-                        resultLabel.Content += "\noverload '-' (Money - m): " + (money - uint.Parse(userValue3.Text)).ToString();
-                        resultLabel.Content += "\noverload '-' (m - Money): " + (uint.Parse(userValue3.Text) - money).ToString();
-                        {
-                            Random rand = new Random();
-                            Money money2 = new Money((uint)rand.Next(0, 100), (byte)rand.Next(0, 99));
-                            resultLabel.Content += $"\noverload '-' (Money1 - Money2({money2.Rubles}, {money2.Kopeks})): " + (money - money2).ToString();
-                        }                        
-                        resultLabel.Content += "\noverload '++': " + (++money).ToString();
-                        resultLabel.Content += "\noverload '--': " + (--money).ToString();
-                        resultLabel.Content += "\nexplicit uint: " + ((uint)money).ToString();
-                        resultLabel.Content += "\nimplicit bool: " + (money == true).ToString();
-                    }
-                    else
-                    {
-                        resultLabel.Content = "Incorrect input, try again!";
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        void TaskChanger(string taskName, string taskText, string entryMessage, string v1 = "", string v2 = "", string v3 = "")
-        {
-            taskNameLabel.Content = taskName;
-            taskTextLabel.Content = taskText;
-            entryMessageLabel.Content = entryMessage;
-            ChangeInputField(v1, v2, v3);
-        }
-
-        void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
-        {
-            valueName1.Content = v1;
-            valueName2.Content = v2;
-            valueName3.Content = v3;
-
-            userValue1.Visibility = VisualChanger.ChangeVisible(v1 != "");
-            userValue2.Visibility = VisualChanger.ChangeVisible(v2 != "");
-            userValue3.Visibility = VisualChanger.ChangeVisible(v3 != "");
-
-            resultLabel.RenderTransform = new TranslateTransform();
-            if (v3 != "")
-            {
-                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue3.Margin.Top + 23 - resultLabel.Margin.Top;
-            }
-            else if (v2 != "")
-            {
-                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue2.Margin.Top + 23 - resultLabel.Margin.Top;
-            }
-            else if (v1 != "")
-            {
-                ((TranslateTransform)resultLabel.RenderTransform).Y = userValue1.Margin.Top + 23 - resultLabel.Margin.Top;
-            }
-        }
-
-        void ResultText(Func<bool> checkFunc, Func<string> resultFunc)
-        {
-            resultLabel.Content = LabMath.ResultText(
-                () => checkFunc(),
-                () => resultFunc());
         }
     }
 }

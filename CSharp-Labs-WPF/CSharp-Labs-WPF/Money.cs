@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,11 @@ namespace CSharp_Labs_WPF
 
         public Money(uint rubles, byte kopeks)
         {
+            while (kopeks >= 100)
+            {
+                rubles++;
+                kopeks -= 100;
+            }
             this.rubles = rubles;
             this.kopeks = kopeks;
         }

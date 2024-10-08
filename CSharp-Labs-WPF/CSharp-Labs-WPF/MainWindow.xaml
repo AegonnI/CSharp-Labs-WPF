@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharp_Labs_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="510" Width="1215">
+        Closing="DataWindow_Closing"
+        Title="AegonLabs" Height="510" Width="1215">
     <Grid x:Name="mainGrid">
         <Label x:Name="taskNameLabel" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="taskTextLabel" Content="Label" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
@@ -41,6 +42,47 @@
         <Label x:Name="valueName1" Content="Label" HorizontalAlignment="Right" Margin="0,50,590,0" VerticalAlignment="Top" Height="25"/>
         <Label x:Name="valueName2" Content="Label" HorizontalAlignment="Right" Margin="0,73,590,0" VerticalAlignment="Top" Height="25"/>
         <Label x:Name="valueName3" Content="Label" HorizontalAlignment="Right" Margin="0,96,590,0" VerticalAlignment="Top" Height="25"/>
-        <Label x:Name="resultLabel" Content="Label" HorizontalAlignment="Left" Margin="608,139,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="resultLabel" Content="Label" HorizontalAlignment="Left" Margin="608,139,0,0" VerticalAlignment="Top" BorderBrush="Orange" Background="{x:Null}" BorderThickness="1,1,1,1"/>
+        <Ellipse HorizontalAlignment="Left" Height="581" Margin="-152,-118,0,0" Stroke="Orange" VerticalAlignment="Top" Width="660" RenderTransformOrigin="0.521,0.512">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="9"/>
+                    <RotateTransform Angle="0.843"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse HorizontalAlignment="Left" Height="366" Margin="908,276,0,0" Stroke="Orange" VerticalAlignment="Top" Width="474">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="9" AngleX="3"/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse HorizontalAlignment="Left" Height="90" Margin="1076,158,0,0" Stroke="Orange" VerticalAlignment="Top" Width="118">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="9" AngleX="3"/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse HorizontalAlignment="Left" Height="91" Margin="506,373,0,0" Stroke="Orange" VerticalAlignment="Top" Width="118">
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="9" AngleX="3"/>
+                    <RotateTransform Angle="-19.017"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
     </Grid>
 </Window>
+
