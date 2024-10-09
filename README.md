@@ -34,11 +34,6 @@ public Money() // Конструктор по умолчанию
 ```c#
 public Money(uint rubles, byte kopeks)
 {
-    while (kopeks >= 100)
-    {
-        rubles++;
-        kopeks -= 100;
-    }
     this.rubles = rubles;
     this.kopeks = kopeks;
 }
