@@ -34,6 +34,11 @@ public Money() // Конструктор по умолчанию
 ```c#
 public Money(uint rubles, byte kopeks)
 {
+    while (kopeks >= 100)
+    {
+        rubles++;
+        kopeks -= 100;
+    }
     this.rubles = rubles;
     this.kopeks = kopeks;
 }
@@ -77,25 +82,14 @@ public byte Kopeks {...};
 ```
 
 ## Тесты
-# Если пользователь успешно ввел значение рублей и копеек, то продолжаем, иначе выдаем сообщение о некорректном вводе
-```c#
-Money money = new Money(uint.Parse(userValue1.Text), byte.Parse(userValue2.Text)); //создаем объект класса Money со значениями введеными пользователем
-resultLabel.Content = "ToString: " + money.ToString(); //вывод денег на экран
 
-// выводим все перегрузки
-resultLabel.Content += "\noverload '+': " + (money + uint.Parse(userValue3.Text)).ToString();
-resultLabel.Content += "\noverload '-' (Money - m): " + (money - uint.Parse(userValue3.Text)).ToString();
-resultLabel.Content += "\noverload '-' (m - Money): " + (uint.Parse(userValue3.Text) - money).ToString();
-{
-    Random rand = new Random();
-    Money money2 = new Money((uint)rand.Next(0, 100), (byte)rand.Next(0, 99));
-    resultLabel.Content += $"\noverload '-' (Money1 - Money2({money2.Rubles}, {money2.Kopeks})): " + (money - money2).ToString();
-}                        
-resultLabel.Content += "\noverload '++': " + (++money).ToString();
-resultLabel.Content += "\noverload '--': " + (--money).ToString();
-resultLabel.Content += "\nexplicit uint: " + ((uint)money).ToString();
-resultLabel.Content += "\nimplicit bool: " + (money == true).ToString();
-```
+# Если пользователь успешно ввел значение рублей и копеек
 
 *Вывод:*
 ![image](https://github.com/user-attachments/assets/41497791-dab3-48e2-8ea5-46e34eacb4ad)
+
+# Если пользователь ввел не корректные значения значение рублей и копеек
+
+*Вывод:*
+![image](https://github.com/user-attachments/assets/a5d1d469-72e1-49d8-8e16-aad8e8e5bf46)
+
