@@ -28,6 +28,7 @@ namespace CSharp_Labs_WPF
     public partial class MainWindow : Window
     {
         string task;
+        bool darkLightTheme = false; // 0 - light, 1 - dark
 
         public MainWindow()
         {
@@ -686,6 +687,19 @@ namespace CSharp_Labs_WPF
 
                 default:
                     break;
+            }
+        }
+
+        private void DarkLightToggle_Click(object sender, RoutedEventArgs e)
+        {
+            darkLightTheme = !darkLightTheme;
+            if (darkLightTheme)
+            {
+                DarkLightToggle.Content = "Dark";
+            }
+            else
+            {
+                DarkLightToggle.Content = "Light";
             }
         }
     }
