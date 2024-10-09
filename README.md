@@ -83,12 +83,13 @@ public byte Kopeks {...};
 
 ## Тесты
 
-# Если пользователь успешно ввел значение рублей и копеек
+# Если пользователь успешно ввел значения рублей и копеек
 
 *Вывод:*
-![image](https://github.com/user-attachments/assets/41497791-dab3-48e2-8ea5-46e34eacb4ad)
+![image](https://github.com/user-attachments/assets/e5ba4280-394a-490f-82d6-2da2471ccf0e)
 
-# Если пользователь ввел не корректные значения значение рублей и копеек
+
+# Если пользователь ввел не корректные значения рублей и копеек
 
 *Вывод:*
 ![image](https://github.com/user-attachments/assets/a5d1d469-72e1-49d8-8e16-aad8e8e5bf46)
