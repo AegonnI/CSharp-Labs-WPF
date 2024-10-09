@@ -20,11 +20,11 @@ namespace CSharp_Labs_WPF
 
         public Money(uint rubles, byte kopeks)
         {
-            while (kopeks >= 100)
-            {
-                rubles++;
-                kopeks -= 100;
-            }
+            //while (kopeks >= 100)
+            //{
+            //    rubles++;
+            //    kopeks -= 100;
+            //}
             this.rubles = rubles;
             this.kopeks = kopeks;
         }
@@ -43,7 +43,7 @@ namespace CSharp_Labs_WPF
         //перегрузка оператора вычитания, возвращает объект типа Money
         public static Money operator -(Money money, uint kopeks)
         {
-            if (money.rubles * 100 + money.kopeks > kopeks)
+            if (100 * money.rubles + money.kopeks > kopeks)
             {
                 return new Money((100 * money.rubles + money.kopeks - kopeks) / 100, 
                            (byte)(100 * LabMath.fraction((decimal)(money.rubles * 100 + money.kopeks - kopeks) / 100)));
@@ -52,7 +52,7 @@ namespace CSharp_Labs_WPF
         }
         public static Money operator -(uint kopeks, Money money)
         {
-            if (money.rubles * 100 + money.kopeks < kopeks)
+            if (100 * money.rubles + money.kopeks < kopeks)
             {
                 return new Money((kopeks - 100 * money.rubles + money.kopeks) / 100,
                            (byte)(100 * LabMath.fraction((decimal)(kopeks - 100 * money.rubles + money.kopeks) / 100)));
@@ -63,8 +63,10 @@ namespace CSharp_Labs_WPF
         {
             if (100 * money1.rubles + money1.kopeks > 100 * money2.rubles + money2.kopeks)
             {
-                return new Money((100 * (money1.rubles - money2.rubles) + money1.kopeks - money2.kopeks) / 100,
-                           (byte)(100 * LabMath.fraction((decimal)(100 * (money1.rubles - money2.rubles) + money1.kopeks - money2.kopeks) / 100)));
+                return new Money(
+                    (100 * (money1.rubles - money2.rubles) + money1.kopeks - money2.kopeks) / 100,
+                    (byte)(100 * LabMath.fraction(
+                        (decimal)(100 * (money1.rubles - money2.rubles) + money1.kopeks - money2.kopeks) / 100)));
             }
             return new Money(0, 0);
         }

@@ -192,7 +192,7 @@ namespace CSharp_Labs_WPF
                     break;
 
                 case "Lab 3: Задание 1":
-                    if (LabChecker.IsUint(userValue1.Text, 9999999) && LabChecker.IsByte(userValue2.Text) && LabChecker.IsUint(userValue3.Text))
+                    if (LabChecker.IsUint(userValue1.Text, 9999999) && LabChecker.IsByte(userValue2.Text, 99) && LabChecker.IsUint(userValue3.Text, 9999999))
                     {
                         Money money = new Money(uint.Parse(userValue1.Text), byte.Parse(userValue2.Text));
 
@@ -679,7 +679,7 @@ namespace CSharp_Labs_WPF
                          "\r\nбыть меньше 0).Результат" +
                          "\r\nдолжен быть типа Money.",
 
-                         "Введите неотрицательные значения рублей и копеек",
+                         "Введите неотрицательные значения \nрублей и копеек(до 100)",
 
                          "rubles = ", "kopeks = ", "minus kopeks = ");
                     break;

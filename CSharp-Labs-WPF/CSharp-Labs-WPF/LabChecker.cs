@@ -75,12 +75,19 @@ namespace CSharp_Labs_WPF
         {
             return uint.TryParse(number, out var result)
                 && !(number[0] == '0' && number.Length != 1)
-                && uint.Parse(number) <= 9999999;
+                && uint.Parse(number) <= maxValue;
         }
 
         public static bool IsByte(string number)
         {
             return byte.TryParse(number, out var result) && !(number[0] == '0' && number.Length != 1);
+        }
+
+        public static bool IsByte(string number, byte maxValue)
+        {
+            return byte.TryParse(number, out var result) 
+                && !(number[0] == '0' && number.Length != 1) 
+                && byte.Parse(number) <= maxValue;
         }
     }
 }
