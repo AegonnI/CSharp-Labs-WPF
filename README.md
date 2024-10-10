@@ -101,7 +101,7 @@ public static Money operator -(Money money, uint kopeks)
 ![image](https://github.com/user-attachments/assets/e5ba4280-394a-490f-82d6-2da2471ccf0e)
 
 
-# Если пользователь ввел не корректные значения рублей и копеек
+# Если пользователь ввел некорректные значения рублей и копеек
 
 *Вывод:*
 ![image](https://github.com/user-attachments/assets/a5d1d469-72e1-49d8-8e16-aad8e8e5bf46)
