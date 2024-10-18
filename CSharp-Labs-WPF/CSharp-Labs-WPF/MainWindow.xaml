@@ -33,6 +33,7 @@
             <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 9"/>
             <ComboBoxItem Content="Lab 2: Задание 13"/>
             <ComboBoxItem Content="Lab 3: Задание 1"/>
+            <ComboBoxItem Content="Lab 4"/>
         </ComboBox>
         <Label x:Name="entryMessageLabel" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="userValue1" HorizontalAlignment="Left" Margin="607,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>

@@ -218,6 +218,18 @@ namespace CSharp_Labs_WPF
                     }
                     break;
 
+                case "Lab 4":
+                    if (LabChecker.IsIntNumber(userValue1.Text))
+                    {
+                        LabMatrix matrix = new LabMatrix(int.Parse(userValue1.Text));
+                        resultLabel.Content = matrix.ToString();
+                    }
+                    else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
                 default:
                     break;
             }
@@ -695,6 +707,34 @@ namespace CSharp_Labs_WPF
                          "Введите неотрицательные значения \nрублей и копеек(до 100)",
 
                          "rubles = ", "kopeks = ", "minus kopeks = ");
+                    break;
+
+                case "Lab 4":
+                    TaskChanger("Задание 1",
+
+                         "Класс Money" +
+                         "\r\n\r\nПоля uint rubles, byte kopeks" +
+                         "\r\n\r\nВычитание копеек (uint) из" +
+                         "\r\nобъекта типа Money(учесть, что" +
+                         "\r\nденежная величина не может" +
+                         "\r\nбыть меньше 0).Результат" +
+                         "\r\nдолжен быть типа Money." +
+                         "Унарные операции:" +
+                         "\r\n-- вычитание копейки из объекта типа Money" +
+                         "\r\n++ добавление копейки к объекту типа Money" +
+                         "\r\nОперации приведения типа:" +
+                         "\r\nuint (явная) результатом является количество рублей" +
+                         "\r\n(копейки отбрасываются);" +
+                         "\r\nbool (неявная) результатом является true, если денежная" +
+                         "\r\nсумма не равна 0." +
+                         "\r\nБинарные операции:" +
+                         "\r\n- Money m, беззнаковое целое число (лево- и" +
+                         "\r\nправосторонние операции). Число обозначает копейки" +
+                         "\r\n- Money m1, Money m2 вычитание денежных сумм",
+
+                         "Введите неотрицательные значения \nрублей и копеек(до 100)",
+
+                         "n = ");
                     break;
 
                 default:
