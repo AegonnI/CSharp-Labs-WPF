@@ -7,84 +7,110 @@
         mc:Ignorable="d"
         Closing="DataWindow_Closing"
         Title="AegonLabs" Height="510" Width="1215">
-    <Grid x:Name="mainGrid">
-        <Label x:Name="taskNameLabel" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="taskTextLabel" Content="Label" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="tasksComboBox" HorizontalAlignment="Left" Margin="948,23,0,0" VerticalAlignment="Top" Width="223" SelectionChanged="Tasks_SelectionChanged" IsReadOnly="True">
-            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 1"/>
-            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 3"/>
-            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 5"/>
-            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 7"/>
-            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 9"/>
-            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 1"/>
-            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 3"/>
-            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 5"/>
-            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 7"/>
-            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 9"/>
-            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 1"/>
-            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 3"/>
-            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 5"/>
-            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 7"/>
-            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 9"/>
-            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 1"/>
-            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 3"/>
-            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 5"/>
-            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 7"/>
-            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 9"/>
-            <ComboBoxItem Content="Lab 2: Задание 13"/>
-            <ComboBoxItem Content="Lab 3: Задание 1"/>
-            <ComboBoxItem Content="Lab 4"/>
+
+    <Window.Resources>
+        <ResourceDictionary x:Name="Theme" Source="Themes/Dark.xaml"/>
+    </Window.Resources>
+    
+    <Grid x:Name="mainGrid" Background="{DynamicResource Background}">
+
+        <Grid x:Name="TaskBox">
+            <Label x:Name="taskNameLabel" FontSize="16" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="taskTextLabel" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
+        </Grid>
+
+        <ComboBox x:Name="tasksComboBox" FontSize="12" FontFamily="Arial Black" HorizontalAlignment="Right" Margin="0,23,15,0" VerticalAlignment="Top" Width="223" SelectionChanged="Tasks_SelectionChanged" IsReadOnly="True" Foreground="{DynamicResource Foreground}" Background="{x:Null}">
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 1"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 3"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 5"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 7"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 9"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 1"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 3"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 5"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 7"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 9"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 1"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 3"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 5"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 7"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 9"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 1"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 3"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 5"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 7"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 9"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 2: Задание 13"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 3: Задание 1"/>
+            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 4: Задания 1-3"/>
         </ComboBox>
-        <Label x:Name="entryMessageLabel" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="userValue1" HorizontalAlignment="Left" Margin="607,57,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="userValue2" HorizontalAlignment="Left" Margin="607,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="userValue3" HorizontalAlignment="Left" Margin="607,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="showResultButton" Content="Show_Result" HorizontalAlignment="Left" Margin="748,56,0,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
-        <Label x:Name="valueName1" Content="Label" HorizontalAlignment="Right" Margin="0,50,590,0" VerticalAlignment="Top" Height="25"/>
-        <Label x:Name="valueName2" Content="Label" HorizontalAlignment="Right" Margin="0,73,590,0" VerticalAlignment="Top" Height="25"/>
-        <Label x:Name="valueName3" Content="Label" HorizontalAlignment="Right" Margin="0,96,590,0" VerticalAlignment="Top" Height="25"/>
-        <Label x:Name="resultLabel" Content="Label" HorizontalAlignment="Left" Margin="608,139,0,0" VerticalAlignment="Top" BorderBrush="Orange" Background="{x:Null}" BorderThickness="1,1,1,1"/>
-        <Ellipse HorizontalAlignment="Left" Height="581" Margin="-152,-118,0,0" Stroke="Orange" VerticalAlignment="Top" Width="660" RenderTransformOrigin="0.521,0.512">
-            <Ellipse.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="9"/>
-                    <RotateTransform Angle="0.843"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse HorizontalAlignment="Left" Height="366" Margin="908,276,0,0" Stroke="Orange" VerticalAlignment="Top" Width="474">
-            <Ellipse.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="9" AngleX="3"/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse HorizontalAlignment="Left" Height="90" Margin="1076,158,0,0" Stroke="Orange" VerticalAlignment="Top" Width="118">
-            <Ellipse.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="9" AngleX="3"/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Ellipse HorizontalAlignment="Left" Height="91" Margin="506,373,0,0" Stroke="Orange" VerticalAlignment="Top" Width="118">
-            <Ellipse.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="9" AngleX="3"/>
-                    <RotateTransform Angle="-19.017"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Ellipse.RenderTransform>
-        </Ellipse>
-        <Button x:Name="DarkLightToggle" Content="Light" HorizontalAlignment="Left" Margin="1105,439,0,0" VerticalAlignment="Top" Click="DarkLightToggle_Click"/>
+
+        <Grid x:Name="inputAndOutput">
+            <Grid x:Name="input">
+                <TextBox x:Name="userValue1" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Center" Margin="0,57,-140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="userValue2" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Center" Margin="0,80,-140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <TextBox x:Name="userValue3" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Center" Margin="0,103,-140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+                <Label x:Name="valueName1" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Center" Margin="0,52,5,0" VerticalAlignment="Top" Height="25"/>
+                <Label x:Name="valueName2" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Center" Margin="0,75,5,0" VerticalAlignment="Top" Height="25"/>
+                <Label x:Name="valueName3" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Center" Margin="0,98,5,0" VerticalAlignment="Top" Height="25"/>
+
+                <Label x:Name="entryMessageLabel" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
+            </Grid>
+
+            <Grid x:Name="output" Panel.ZIndex="-1">
+                <Label x:Name="resultLabel" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Center" Margin="0,139,-30,0" VerticalAlignment="Top" BorderBrush="Orange" Background="{x:Null}" BorderThickness="1,1,1,1"/>
+                <Button x:Name="showResultButton" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Center" Margin="0,56,-370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
+            </Grid>
+
+        </Grid>
+
+
+        <Grid x:Name="Ellipses" Panel.ZIndex="-1">
+            <Ellipse HorizontalAlignment="Left" Height="581" Margin="-152,-118,0,0" Stroke="Orange" VerticalAlignment="Top" Width="660" RenderTransformOrigin="0.521,0.512">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="9"/>
+                        <RotateTransform Angle="0.843"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse HorizontalAlignment="Left" Height="366" Margin="908,276,0,0" Stroke="Orange" VerticalAlignment="Top" Width="474">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="9" AngleX="3"/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse HorizontalAlignment="Left" Height="90" Margin="1076,158,0,0" Stroke="Orange" VerticalAlignment="Top" Width="118">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="9" AngleX="3"/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse HorizontalAlignment="Left" Height="91" Margin="506,373,0,0" Stroke="Orange" VerticalAlignment="Top" Width="118">
+                <Ellipse.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="9" AngleX="3"/>
+                        <RotateTransform Angle="-19.017"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+        </Grid>
+
+        <Button x:Name="switchTheme" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Switch Theme" HorizontalAlignment="Right" Margin="0,0,15,15" VerticalAlignment="Bottom" Click="DarkLightToggle_Click"/>
+        <Button x:Name="showHideTaskText" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show-Hide Task Text" HorizontalAlignment="Left" Margin="15,0,0,15" VerticalAlignment="Bottom" Click="showHideTaskText_Click"/>
+        <Button x:Name="showHideEllipses" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show-Hide Ellipses" HorizontalAlignment="Left" Margin="165,0,0,15" VerticalAlignment="Bottom" Click="showHideEllipses_Click"/>
     </Grid>
 </Window>
-

@@ -28,7 +28,7 @@ namespace CSharp_Labs_WPF
     public partial class MainWindow : Window
     {
         string task;
-        bool darkLightTheme = false; // 0 - light, 1 - dark
+        bool isDarkTheme = true; // 0 - light, 1 - dark
 
         public MainWindow()
         {
@@ -37,10 +37,12 @@ namespace CSharp_Labs_WPF
             {
                 var f = new StreamReader("data.dat");
                 task = f.ReadLine();
+                isDarkTheme = bool.Parse(f.ReadLine());
                 f.Close();
             }
             tasksComboBox.Text = task;
             TaskChooser();
+            VisualChanger.ChangeTheme(isDarkTheme, Theme);
         }
 
         private void Tasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -218,10 +220,10 @@ namespace CSharp_Labs_WPF
                     }
                     break;
 
-                case "Lab 4":
+                case "Lab 4: Задания 1-3":
                     if (LabChecker.IsIntNumber(userValue1.Text))
                     {
-                        LabMatrix matrix = new LabMatrix(int.Parse(userValue1.Text));
+                        LabMatrix matrix = new LabMatrix(int.Parse(userValue1.Text), 100);
                         resultLabel.Content = matrix.ToString();
                     }
                     else
@@ -279,6 +281,7 @@ namespace CSharp_Labs_WPF
         {
             StreamWriter f = new StreamWriter("data.dat");
             f.WriteLine(task);
+            f.WriteLine(isDarkTheme);
             f.Close();
         }
 
@@ -709,30 +712,23 @@ namespace CSharp_Labs_WPF
                          "rubles = ", "kopeks = ", "minus kopeks = ");
                     break;
 
-                case "Lab 4":
+                case "Lab 4: Задания 1-3":
                     TaskChanger("Задание 1",
 
-                         "Класс Money" +
-                         "\r\n\r\nПоля uint rubles, byte kopeks" +
-                         "\r\n\r\nВычитание копеек (uint) из" +
-                         "\r\nобъекта типа Money(учесть, что" +
-                         "\r\nденежная величина не может" +
-                         "\r\nбыть меньше 0).Результат" +
-                         "\r\nдолжен быть типа Money." +
-                         "Унарные операции:" +
-                         "\r\n-- вычитание копейки из объекта типа Money" +
-                         "\r\n++ добавление копейки к объекту типа Money" +
-                         "\r\nОперации приведения типа:" +
-                         "\r\nuint (явная) результатом является количество рублей" +
-                         "\r\n(копейки отбрасываются);" +
-                         "\r\nbool (неявная) результатом является true, если денежная" +
-                         "\r\nсумма не равна 0." +
-                         "\r\nБинарные операции:" +
-                         "\r\n- Money m, беззнаковое целое число (лево- и" +
-                         "\r\nправосторонние операции). Число обозначает копейки" +
-                         "\r\n- Money m1, Money m2 вычитание денежных сумм",
+                         "Задания 1, 2 и 3 выполнить в виде методов одного класса." +
+                         "\r\nЗадание 1 реализовать в виде конструкторов " +
+                         "\r\n(кроме них, могут быть и другие конструкторы). " +
+                         "\r\nКласс содержит единственное поле – двумерный массив." +
+                         "\r\nВ задании 3 перегрузить необходимые операторы и " +
+                         "\r\nпосчитать значение матричного выражения" +
+                         "\r\n(решение без перегрузки не принимается). " +
+                         "\r\nПерегрузить метод ToString() — сформировать строку из" +
+                         "\r\nдвумерного массива для отображения его на экране в виде таблицы. " +
+                         "\r\nПриложить в отчет скриншот" +
+                         "\r\nпроверки на онлайн-калькуляторе, чтобы показать," +
+                         "\r\nчто выражение посчитано верно. ",
 
-                         "Введите неотрицательные значения \nрублей и копеек(до 100)",
+                         "",
 
                          "n = ");
                     break;
@@ -744,15 +740,18 @@ namespace CSharp_Labs_WPF
 
         private void DarkLightToggle_Click(object sender, RoutedEventArgs e)
         {
-            darkLightTheme = !darkLightTheme;
-            if (darkLightTheme)
-            {
-                DarkLightToggle.Content = "Dark";
-            }
-            else
-            {
-                DarkLightToggle.Content = "Light";
-            }
+            isDarkTheme = !isDarkTheme;
+            VisualChanger.ChangeTheme(isDarkTheme, Theme);
+        }
+
+        private void showHideTaskText_Click(object sender, RoutedEventArgs e)
+        {
+            TaskBox.Visibility = VisualChanger.VisibleReverse(TaskBox.Visibility);
+        }
+
+        private void showHideEllipses_Click(object sender, RoutedEventArgs e)
+        {
+            Ellipses.Visibility = VisualChanger.VisibleReverse(Ellipses.Visibility);
         }
     }
 }
