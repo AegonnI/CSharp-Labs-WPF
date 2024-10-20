@@ -7,16 +7,28 @@ using System.Windows.Shapes;
 
 namespace CSharp_Labs_WPF
 {
-    internal class LabMatrix
+    internal class Matrix
     {
         private int[,] matrix;
 
-        public LabMatrix(int[,] maxtrix)
+        public Matrix(int[,] maxtrix)
         {
             this.matrix = maxtrix;
         }
 
-        public LabMatrix(int n, int minValue, int maxValue)
+        public Matrix(uint n, uint m, int[] arr)
+        {
+            matrix = new int[n, m];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+
+                }
+            }
+        }
+
+        public Matrix(int n, int minValue, int maxValue)
         {
             matrix = new int[n, n];
             Random rand = new Random();
@@ -45,7 +57,7 @@ namespace CSharp_Labs_WPF
             }
         }
 
-        public LabMatrix(int n, int maxValue)
+        public Matrix(int n, int maxValue)
         {
             matrix = new int[n, n];
             Random rand = new Random();
@@ -64,7 +76,7 @@ namespace CSharp_Labs_WPF
             }
         }
 
-        public LabMatrix(uint n)
+        public Matrix(uint n)
         {
             matrix = new int[n, n];
 
@@ -98,7 +110,7 @@ namespace CSharp_Labs_WPF
             matrix = Tmatrix;
         }
 
-        public static LabMatrix operator +(LabMatrix A, LabMatrix B)
+        public static Matrix operator +(Matrix A, Matrix B)
         {
             if (A.matrix.GetLength(0) != B.matrix.GetLength(0) || A.matrix.GetLength(1) != B.matrix.GetLength(1))
             {
@@ -115,7 +127,7 @@ namespace CSharp_Labs_WPF
             return A;
         }
 
-        public static LabMatrix operator -(LabMatrix A, LabMatrix B)
+        public static Matrix operator -(Matrix A, Matrix B)
         {
             if (A.matrix.GetLength(0) != B.matrix.GetLength(0) || A.matrix.GetLength(1) != B.matrix.GetLength(1))
             {
@@ -132,7 +144,7 @@ namespace CSharp_Labs_WPF
             return A;
         }
 
-        public static LabMatrix operator *(int a, LabMatrix A)
+        public static Matrix operator *(int a, Matrix A)
         {
             for (int i = 0; i < A.matrix.GetLength(0); i++)
             {
@@ -151,6 +163,30 @@ namespace CSharp_Labs_WPF
 
         public override string ToString()
         {
+            //int[] maxLen = new int[matrix.GetLength(1)];
+            //for (int j = 0; j < matrix.GetLength(1); j++)
+            //{
+            //    for (int i = 0; i < matrix.GetLength(0); i++)
+            //    {
+            //        maxLen[j] = Math.Max(matrix[i, j].ToString().Length, maxLen[j]);
+            //    }
+            //}
+
+            //string result = "";
+            //for (int i = 0; i < matrix.GetLength(0); i++)
+            //{
+            //    for (int j = 0; j < matrix.GetLength(1); j++)
+            //    {
+            //        for (int k = 0; k < maxLen[j]-matrix[i, j].ToString().Length; k++)
+            //        {
+            //            result += " ";
+            //        }
+            //        result += matrix[i, j].ToString() + " ";
+            //    }
+            //    result += "\n";
+            //}
+            //return result;
+
             int maxLength = 0;
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
@@ -162,30 +198,16 @@ namespace CSharp_Labs_WPF
 
             string[] matrixLines = new string[matrix.GetLength(0)];
 
-            string result = "";
             for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 string line = "";
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    result += matrix[i, j].ToString().PadLeft(maxLength + 1) + " ";
                     line += matrix[i, j].ToString().PadLeft(maxLength + 1) + " ";
                 }
-                result += "\n";
                 matrixLines[i] = line;
             }
             return string.Join(Environment.NewLine, matrixLines);
-
-            //StringBuilder sb = new StringBuilder();
-            //for (int i = 0; i < matrix.GetLength(0); i++)
-            //{
-            //    for (int j = 0; j < matrix.GetLength(1); j++)
-            //    {
-            //        sb.Append(matrix[i, j] + " ");
-            //    }
-            //    sb.Append("\n");
-            //}
-            //return sb.ToString();
         }
     }
 }

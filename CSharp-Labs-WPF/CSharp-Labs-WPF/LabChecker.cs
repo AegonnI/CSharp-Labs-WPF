@@ -89,5 +89,10 @@ namespace CSharp_Labs_WPF
                 && !(number[0] == '0' && number.Length != 1) 
                 && byte.Parse(number) <= maxValue;
         }
+
+        public static bool IsRealDuoMatrix(string[] arr, uint nm)
+        {
+            return IsIntArray(arr) && LabConverter.StringToIntArr(arr).Length == nm;
+        }
     }
 }

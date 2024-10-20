@@ -57,7 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Lab2v13Extended.cs" />
     <Compile Include="LabFiles.cs" />
-    <Compile Include="LabMatrix.cs" />
+    <Compile Include="Matrix.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="VisualChanger.cs" />
     <Page Include="MainWindow.xaml">

@@ -11,7 +11,7 @@
     <Window.Resources>
         <ResourceDictionary x:Name="Theme" Source="Themes/Dark.xaml"/>
     </Window.Resources>
-    
+
     <Grid x:Name="mainGrid" Background="{DynamicResource Background}">
 
         <Grid x:Name="TaskBox">
@@ -47,20 +47,35 @@
 
         <Grid x:Name="inputAndOutput">
             <Grid x:Name="input">
-                <TextBox x:Name="userValue1" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Center" Margin="0,57,-140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="userValue2" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Center" Margin="0,80,-140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                <TextBox x:Name="userValue3" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Center" Margin="0,103,-140,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <Grid HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="userValue1" Grid.Column="1" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,57,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="userValue2" Grid.Column="1" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,80,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="userValue3" Grid.Column="1" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,103,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
-                <Label x:Name="valueName1" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Center" Margin="0,52,5,0" VerticalAlignment="Top" Height="25"/>
-                <Label x:Name="valueName2" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Center" Margin="0,75,5,0" VerticalAlignment="Top" Height="25"/>
-                <Label x:Name="valueName3" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Center" Margin="0,98,5,0" VerticalAlignment="Top" Height="25"/>
+                    <Label x:Name="valueName1" Grid.Column="0" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,52,0,0" VerticalAlignment="Top" Height="25"/>
+                    <Label x:Name="valueName2" Grid.Column="0" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,75,0,0" VerticalAlignment="Top" Height="25"/>
+                    <Label x:Name="valueName3" Grid.Column="0" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,98,0,0" VerticalAlignment="Top" Height="25"/>
+
+                    <Button x:Name="showResultButton" Grid.Column="2" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Right" Margin="0,57,370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
+                </Grid>
 
                 <Label x:Name="entryMessageLabel" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
             </Grid>
 
+            <Button x:Name="ChooseMatrixA" Content="A" HorizontalAlignment="Left" Margin="840,228,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseMatrixA_Click"/>
+            <Button x:Name="ChooseMatrixB" Content="B" HorizontalAlignment="Left" Margin="840,252,0,0" VerticalAlignment="Top" Click="ChooseMatrixB_Click"/>
+            <Button x:Name="ChooseMatrixC" Content="C" HorizontalAlignment="Left" Margin="840,277,0,0" VerticalAlignment="Top" Click="ChooseMatrixC_Click"/>
+            <Button x:Name="ChooseConstructor1" Content="Constructor 1" HorizontalAlignment="Left" Margin="857,228,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseConstructor1_Click"/>
+            <Button x:Name="ChooseConstructor2" Content="Constructor 2" HorizontalAlignment="Left" Margin="857,252,0,0" VerticalAlignment="Top" Click="ChooseConstructor2_Click"/>
+            <Button x:Name="ChooseConstructor3" Content="Constructor 3" HorizontalAlignment="Left" Margin="857,277,0,0" VerticalAlignment="Top" Click="ChooseConstructor3_Click"/>
+
             <Grid x:Name="output" Panel.ZIndex="-1">
-                <Label x:Name="resultLabel" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Center" Margin="0,139,-30,0" VerticalAlignment="Top" BorderBrush="Orange" Background="{x:Null}" BorderThickness="1,1,1,1"/>
-                <Button x:Name="showResultButton" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Center" Margin="0,56,-370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
+                <Label x:Name="resultLabel" FontSize="16" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="620,139,0,0" VerticalAlignment="Top" BorderBrush="Orange" Background="{x:Null}" BorderThickness="1,1,1,1"/>
             </Grid>
 
         </Grid>

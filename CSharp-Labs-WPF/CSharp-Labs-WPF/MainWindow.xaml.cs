@@ -30,6 +30,11 @@ namespace CSharp_Labs_WPF
         string task;
         bool isDarkTheme = true; // 0 - light, 1 - dark
 
+        private Matrix A;
+        private Matrix B;
+        private Matrix C;
+        private Matrix D;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -223,7 +228,17 @@ namespace CSharp_Labs_WPF
                 case "Lab 4: Задания 1-3":
                     if (LabChecker.IsIntNumber(userValue1.Text))
                     {
-                        LabMatrix matrix = new LabMatrix(int.Parse(userValue1.Text), 100);
+                        if (ChooseConstructor1.IsEnabled)
+                        {
+                            if (LabChecker.IsUint(userValue1.Text) && LabChecker.IsUint(userValue2.Text) && LabChecker.IsRealDuoMatrix(userValue3.Text.Split(' '), uint.Parse(userValue1.Text) * uint.Parse(userValue2.Text)))
+                            {
+                                D = new Matrix(uint.Parse(userValue1.Text), uint.Parse(userValue2.Text))
+                            }
+                        }
+                        
+                        
+                        
+                        Matrix matrix = new Matrix(uint.Parse(userValue1.Text));
                         resultLabel.Content = matrix.ToString();
                     }
                     else
@@ -243,6 +258,28 @@ namespace CSharp_Labs_WPF
             taskTextLabel.Content = taskText;
             entryMessageLabel.Content = entryMessage;
             ChangeInputField(v1, v2, v3);
+
+            ChooseConstructor1.Visibility = Visibility.Hidden;
+            ChooseConstructor2.Visibility = Visibility.Hidden;
+            ChooseConstructor3.Visibility = Visibility.Hidden;
+            ChooseMatrixA.Visibility = Visibility.Hidden;
+            ChooseMatrixB.Visibility = Visibility.Hidden;
+            ChooseMatrixC.Visibility = Visibility.Hidden;
+        }
+
+        void TaskChanger(string taskName, string taskText, string entryMessage, uint type = 0, string v1 = "", string v2 = "", string v3 = "")
+        {
+            taskNameLabel.Content = taskName;
+            taskTextLabel.Content = taskText;
+            entryMessageLabel.Content = entryMessage;
+            ChangeInputField(v1, v2, v3);
+
+            ChooseConstructor1.Visibility = Visibility.Visible;
+            ChooseConstructor2.Visibility = Visibility.Visible;
+            ChooseConstructor3.Visibility = Visibility.Visible;
+            ChooseMatrixA.Visibility = Visibility.Visible;
+            ChooseMatrixB.Visibility = Visibility.Visible;
+            ChooseMatrixC.Visibility = Visibility.Visible;
         }
 
         void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
@@ -729,8 +766,9 @@ namespace CSharp_Labs_WPF
                          "\r\nчто выражение посчитано верно. ",
 
                          "",
+                         1,
 
-                         "n = ");
+                         "n = ", "m = ", "arr = ");
                     break;
 
                 default:
@@ -752,6 +790,61 @@ namespace CSharp_Labs_WPF
         private void showHideEllipses_Click(object sender, RoutedEventArgs e)
         {
             Ellipses.Visibility = VisualChanger.VisibleReverse(Ellipses.Visibility);
+        }
+
+        private void ChooseConstructor1_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseConstructor1.IsEnabled = false;
+            ChooseConstructor2.IsEnabled = true;
+            ChooseConstructor3.IsEnabled = true;
+            userValue2.Text = "";
+            userValue3.Text = "";
+            ChangeInputField("n = ", "m = ", "arr = ");
+        }
+
+        private void ChooseConstructor2_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseConstructor1.IsEnabled = true;
+            ChooseConstructor2.IsEnabled = false;
+            ChooseConstructor3.IsEnabled = true;
+
+            userValue2.Text = "";
+            userValue3.Text = "";
+            ChangeInputField("n = ", "maxValue(optional) = ", "minValue(optional) = ");
+        }
+
+        private void ChooseConstructor3_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseConstructor1.IsEnabled = true;
+            ChooseConstructor2.IsEnabled = true;
+            ChooseConstructor3.IsEnabled = false;
+            userValue2.Text = "";
+            userValue3.Text = "";
+            ChangeInputField("n = ");
+        }
+
+        private void ChooseMatrixA_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseMatrixA.IsEnabled = false;
+            ChooseMatrixB.IsEnabled = true;
+            ChooseMatrixC.IsEnabled = true;
+            D = A;
+        }
+
+        private void ChooseMatrixB_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseMatrixA.IsEnabled = true;
+            ChooseMatrixB.IsEnabled = false;
+            ChooseMatrixC.IsEnabled = true;
+            D = B;
+        }
+
+        private void ChooseMatrixC_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseMatrixA.IsEnabled = true;
+            ChooseMatrixB.IsEnabled = true;
+            ChooseMatrixC.IsEnabled = false;
+            D = C;
         }
     }
 }
