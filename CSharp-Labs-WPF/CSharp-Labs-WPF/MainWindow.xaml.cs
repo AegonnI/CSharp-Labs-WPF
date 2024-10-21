@@ -42,7 +42,15 @@ namespace CSharp_Labs_WPF
             {
                 var f = new StreamReader("data.dat");
                 task = f.ReadLine();
-                isDarkTheme = bool.Parse(f.ReadLine());
+                try
+                {
+                    isDarkTheme = bool.Parse(f.ReadLine());
+                }
+                catch 
+                {
+                    isDarkTheme = true;
+                }
+                
                 f.Close();
             }
             tasksComboBox.Text = task;
@@ -226,20 +234,40 @@ namespace CSharp_Labs_WPF
                     break;
 
                 case "Lab 4: Задания 1-3":
-                    if (LabChecker.IsIntNumber(userValue1.Text))
+                    if (LabChecker.IsPosetiveInt(userValue1.Text))
                     {
-                        if (ChooseConstructor1.IsEnabled)
+                        if (!ChooseConstructor1.IsEnabled)
                         {
-                            if (LabChecker.IsUint(userValue1.Text) && LabChecker.IsUint(userValue2.Text) && LabChecker.IsRealDuoMatrix(userValue3.Text.Split(' '), uint.Parse(userValue1.Text) * uint.Parse(userValue2.Text)))
+                            if (LabChecker.IsPosetiveInt(userValue2.Text) 
+                             && LabChecker.IsRealDuoMatrix(userValue3.Text.Split(' ')
+                                , int.Parse(userValue1.Text) * int.Parse(userValue2.Text)))
                             {
-                                D = new Matrix(uint.Parse(userValue1.Text), uint.Parse(userValue2.Text))
+                                D = new Matrix(int.Parse(userValue1.Text),
+                                               int.Parse(userValue2.Text),
+                                               LabConverter.StringToIntArr(userValue3.Text.Split(' ')));
+                                resultLabel.Content = D.ToString();
                             }
                         }
-                        
-                        
-                        
-                        Matrix matrix = new Matrix(uint.Parse(userValue1.Text));
-                        resultLabel.Content = matrix.ToString();
+                        if (!ChooseConstructor2.IsEnabled)
+                        {
+                            if (LabChecker.IsInt(userValue2.Text))
+                            {
+                                if (userValue3.Text == "")
+                                {
+                                    D = new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text));
+                                }
+                                else if (LabChecker.IsInt(userValue3.Text))
+                                {
+                                    D = new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text));
+                                }
+                                resultLabel.Content = D.ToString();
+                            }
+                        }
+                        if (!ChooseConstructor3.IsEnabled)
+                        {
+                            D = new Matrix(int.Parse(userValue1.Text));
+                            resultLabel.Content = D.ToString();
+                        }
                     }
                     else
                     {
@@ -810,7 +838,7 @@ namespace CSharp_Labs_WPF
 
             userValue2.Text = "";
             userValue3.Text = "";
-            ChangeInputField("n = ", "maxValue(optional) = ", "minValue(optional) = ");
+            ChangeInputField("n = ", "maxValue = ", "minValue(optional) = ");
         }
 
         private void ChooseConstructor3_Click(object sender, RoutedEventArgs e)

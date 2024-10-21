@@ -16,19 +16,37 @@ namespace CSharp_Labs_WPF
             this.matrix = maxtrix;
         }
 
-        public Matrix(uint n, uint m, int[] arr)
+        public Matrix(int n, int m, int[] arr)
         {
             matrix = new int[n, m];
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
 
+            int i = n - 1, j = 0;
+            int si = i, sj = j;
+            for (int k = 0; k < arr.Length; k++)
+            {
+                matrix[i, j] = arr[k];
+                if (i + 1 >= n || j + 1 >= m)
+                {
+                    if (si > 0)
+                    {
+                        si--;
+                    }
+                    else
+                    {
+                        sj++;
+                    }
+                    i = si;
+                    j = sj;
                 }
+                else
+                {
+                    i++; j++;
+                }
+                
             }
         }
 
-        public Matrix(int n, int minValue, int maxValue)
+        public Matrix(int n, int maxValue, int minValue)
         {
             matrix = new int[n, n];
             Random rand = new Random();
@@ -76,7 +94,7 @@ namespace CSharp_Labs_WPF
             }
         }
 
-        public Matrix(uint n)
+        public Matrix(int n)
         {
             matrix = new int[n, n];
 

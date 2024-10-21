@@ -29,11 +29,25 @@ namespace CSharp_Labs_WPF
             return int.TryParse(number, out var result) && !(number[0] == '0' && number.Length != 1);
         }
 
+        public static bool IsInt(string number)
+        {
+            return int.TryParse(number, out var result) && !(number[0] == '0' && number.Length != 1);
+        }
+
         public static bool IsPosetiveOfZeroInt(string number)
         {
             if (IsIntNumber(number))
             {
                 return int.Parse(number) >= 0;
+            }
+            return false;
+        }
+
+        public static bool IsPosetiveInt(string number)
+        {
+            if (IsIntNumber(number))
+            {
+                return int.Parse(number) > 0;
             }
             return false;
         }
@@ -90,7 +104,7 @@ namespace CSharp_Labs_WPF
                 && byte.Parse(number) <= maxValue;
         }
 
-        public static bool IsRealDuoMatrix(string[] arr, uint nm)
+        public static bool IsRealDuoMatrix(string[] arr, int nm)
         {
             return IsIntArray(arr) && LabConverter.StringToIntArr(arr).Length == nm;
         }
