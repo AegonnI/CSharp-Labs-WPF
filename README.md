@@ -316,32 +316,29 @@ public static void CreateBinaryFile(string filePath, int numbers_count, int maxV
 ## Тесты
 
 # Задание 4
-
 # Пользователь успешно ввел значения
 *Вывод:*
 ![image](https://github.com/user-attachments/assets/4e946e48-330d-4587-98b2-64591999a2ae)
 
 # Задание 5
-
 # Если пользователь успешно ввел значения и он нашел игрушку
 *Вывод:*
 ![image](https://github.com/user-attachments/assets/76f165f5-f88e-4442-b6b2-4fe78278a617)
 
-
-# Если пользователь успешно ввел значения для матрицы С, используя заполнение спиралью
+# Если пользователь успешно ввел значения и не нашел игрушку
 *Вывод:*
-![image](https://github.com/user-attachments/assets/3fe40eca-5bb9-4861-a020-402b81b0eaf9)
+![image](https://github.com/user-attachments/assets/f1445c39-ec2b-4436-8e4a-297f111af96e)
 
-# Вывод значения выражения при правельно введеных матрицах A^т+B-3*C
+# Задание 6
+# Если пользователь успешно ввел значения
 *Вывод:*
-![image](https://github.com/user-attachments/assets/70cf5f56-bc06-4802-b2f8-93f05b4cabb4)
+![image](https://github.com/user-attachments/assets/1e7a6969-a3cf-4599-9cae-f60033eb5022)
 
-# Для проверки используем калькулятор матриц https://www.desmos.com/matrix?lang=ru
+# Задание 7
 *Вывод:*
-![image](https://github.com/user-attachments/assets/2c2fbe35-55c0-4515-a695-f1fd6d9b6870)
+![image](https://github.com/user-attachments/assets/f78db0e7-67e5-49b8-99d8-2b6d90118f80)
 
-# В случае, если выражение невозможно посчитать
+
+# Задание 8
 *Вывод:*
-![image](https://github.com/user-attachments/assets/199317f5-57a4-41cc-904b-6582602bcf83)
-
-
+![image](https://github.com/user-attachments/assets/495d1aeb-44fb-4a66-b210-2dfb016c54e5)
