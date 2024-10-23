@@ -23,6 +23,9 @@ namespace CSharp_Labs_WPF
             public int maxAge;
         }
 
+        // Files
+        // Ex8
+        // Записывает в файл все строки без знаков препирания
         public static void WriteWithoutPunctuation(string sourceFilePath, string newFilePath)
         {
             StreamReader sourceFile = new StreamReader(sourceFilePath);
@@ -36,30 +39,26 @@ namespace CSharp_Labs_WPF
                     newFile.WriteLine(line);
                 }
             }
-            sourceFile.Close();
-            newFile.Close();
+            sourceFile.Close(); newFile.Close();
         }
 
+        // Ex7
+        // Находит разницу между первым и минимальным
         public static int DiffBetweenFirstAndMin(string fileName)
         {
             StreamReader file = new StreamReader(fileName);
             string[] numbs = file.ReadToEnd().Split(' ');
-            int first = int.Parse(numbs[0]);
+            int first = int.Parse(numbs[0]);    
             int min = first;
             for (int i = 1; i < numbs.Length-1; i++)
             {
                 min = Math.Min(min, int.Parse(numbs[i]));
             }
-
-            //while (!file.EndOfStream)
-            //{
-            //    min = Math.Min(min, int.Parse(file.ReadLine()));
-            //}
-            //file.Close();
-
             return first - min;
         }
 
+        // Ex6
+        // Находит сумму элементов, оканчивающихся на заданное значение
         public static int FindSumOfElemsWithGivenEnding(string fileName, int ending)
         {
             StreamReader file = new StreamReader(fileName);
@@ -67,7 +66,7 @@ namespace CSharp_Labs_WPF
             while (!file.EndOfStream)
             {
                 int num = int.Parse(file.ReadLine());
-                if (num % Math.Pow(10, (num.ToString().Length-1)) == ending)
+                if (num % Math.Pow(10, (num.ToString().Length-1)) == ending || num == ending)
                 {
                     sum += num;
                 }
@@ -76,6 +75,7 @@ namespace CSharp_Labs_WPF
             return sum;
         }
 
+        // Создает файл с рандомными значениями(по одному в строке)
         public static void CreateRandomFile(string fileName, int numbers_count, int maxValue, int minValue = 0)
         {
             Random random = new Random();
@@ -87,6 +87,7 @@ namespace CSharp_Labs_WPF
             f.Close();
         }
 
+        // Создает файл с рандомными значениями(в строку)
         public static void CreateRandomOneLineFile(string fileName, int numbers_count, int maxValue, int minValue = 0)
         {
             Random random = new Random();
@@ -98,8 +99,7 @@ namespace CSharp_Labs_WPF
             f.Close();
         }
 
-
-
+        // Возвращает строку с элементами файла
         public static string ReadFile(string fileName, string separator = " ")
         {
             StreamReader file = new StreamReader(fileName);
@@ -112,6 +112,9 @@ namespace CSharp_Labs_WPF
             return string.Join(separator, list.ToArray());
         }
 
+        // Binary Files
+        // Ex5
+        // Находит название игрушки с самой большой ценой из заданного диапазона
         public static string MostExpensiveInTheRange(string sourceFilePath)
         {
             string name = "No one";
@@ -136,6 +139,7 @@ namespace CSharp_Labs_WPF
             return name;
         }
 
+        // Создает файл с игрушками
         public static void CreateFileWithToys(string sourceFilePath, string[] toysNames)
         {
             using (FileStream soursceFile = new FileStream(sourceFilePath, FileMode.Create))
@@ -147,9 +151,8 @@ namespace CSharp_Labs_WPF
                     Toy toy = new Toy();
                     toy.name = toysNames[i];
                     toy.price = random.Next(0, 100);
-                    int minAge;
-                    toy.minAge = (minAge = random.Next(3));
-                    toy.maxAge = random.Next(minAge, 15);
+                    toy.minAge = random.Next(3);
+                    toy.maxAge = random.Next(toy.minAge, 12);
 
                     writer.Write(toy.name);
                     writer.Write(toy.price);
@@ -159,6 +162,8 @@ namespace CSharp_Labs_WPF
             }
         }
 
+        // Ex4
+        // Создает новый бинарный файл без дубликатов исходного файла
         public static void RemoveDuplicates(string sourceFilePath, string newFilePath)
         {
             using (FileStream soursceFile = new FileStream(sourceFilePath, FileMode.Open))
@@ -181,9 +186,9 @@ namespace CSharp_Labs_WPF
             }
         }
 
+        // Возвращает строку с элементами бинарного файла
         public static string BinaryFileToString(string filePath, string separator, string splitter, params Type[] types)
         {
-            List<string> list = new List<string>();
             string result = "";
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
             {
@@ -192,7 +197,6 @@ namespace CSharp_Labs_WPF
                 {
                     if (types.Length == 0)
                     {
-                        //list.Add(reader.ReadInt32().ToString());
                         result += reader.ReadInt32().ToString() + splitter;
                     }
                     else
@@ -201,12 +205,10 @@ namespace CSharp_Labs_WPF
                         {                            
                             if (types[i] == typeof(int))
                             {
-                                //list.Add(reader.ReadInt32().ToString());
                                 result += reader.ReadInt32().ToString() + splitter;
                             }
                             else if (types[i] == typeof(string))
                             {
-                                //list.Add(reader.ReadString().ToString());
                                 result += reader.ReadString().ToString() + splitter;
                             }
                         }
@@ -216,16 +218,14 @@ namespace CSharp_Labs_WPF
                 }
             }
             return result.Substring(0, result.Length - 1);
-            //return string.Join(" ", list.ToArray());
         }
 
+        // Создает бинарный файл с рандомными значениями
         public static void CreateBinaryFile(string filePath, int numbers_count, int maxValue, int minValue = 0)
         {
             Random random = new Random();
-            // Открытие потока для записи в файл
             using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
             {
-                // Запись данных в поток
                 BinaryWriter writer = new BinaryWriter(fileStream);
                 for (int i = 0; i < numbers_count; i++) 
                 {

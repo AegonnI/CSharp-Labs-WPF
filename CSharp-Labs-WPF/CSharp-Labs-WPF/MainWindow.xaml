@@ -22,7 +22,7 @@
             <Label x:Name="taskTextLabel" FontSize="12" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
         </Grid>
 
-        <ComboBox x:Name="tasksComboBox" FontSize="12" FontFamily="Arial Black" HorizontalAlignment="Right" Margin="0,23,15,0" VerticalAlignment="Top" Width="223" SelectionChanged="Tasks_SelectionChanged" IsReadOnly="True" Background="{x:Null}">
+        <ComboBox x:Name="tasksComboBox" FontSize="12" FontFamily="Lucida Console" HorizontalAlignment="Right" Margin="0,23,15,0" VerticalAlignment="Top" Width="223" SelectionChanged="Tasks_SelectionChanged" IsReadOnly="True" Background="{x:Null}">
             <ComboBoxItem Content="Lab 1: Задание 1. Методы: 1"/>
             <ComboBoxItem Content="Lab 1: Задание 1. Методы: 3"/>
             <ComboBoxItem Content="Lab 1: Задание 1. Методы: 5"/>
@@ -70,19 +70,19 @@
                     <Label x:Name="valueName2" Grid.Column="0" FontSize="14" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,75,0,0" VerticalAlignment="Top" Height="25"/>
                     <Label x:Name="valueName3" Grid.Column="0" FontSize="14" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,98,0,0" VerticalAlignment="Top" Height="25"/>
 
-                    <Button x:Name="showResultButton" Grid.Column="2" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Right" Margin="0,57,370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
+                    <Button x:Name="showResultButton" Grid.Column="2" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Right" Margin="0,57,370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
                 </Grid>
 
-                <Label x:Name="entryMessageLabel" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="entryMessageLabel" FontSize="12" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
             </Grid>
 
-            <Button x:Name="ChooseMatrixA" Content="A" HorizontalAlignment="Left" Margin="853,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseMatrixA_Click"/>
-            <Button x:Name="ChooseMatrixB" Content="B" HorizontalAlignment="Left" Margin="853,79,0,0" VerticalAlignment="Top" Click="ChooseMatrixB_Click"/>
-            <Button x:Name="ChooseMatrixC" Content="C" HorizontalAlignment="Left" Margin="853,104,0,0" VerticalAlignment="Top" Click="ChooseMatrixC_Click"/>
-            <Button x:Name="ChooseConstructor1" Content="Constructor 1" HorizontalAlignment="Left" Margin="870,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseConstructor1_Click"/>
-            <Button x:Name="ChooseConstructor2" Content="Constructor 2" HorizontalAlignment="Left" Margin="870,79,0,0" VerticalAlignment="Top" Click="ChooseConstructor2_Click"/>
-            <Button x:Name="ChooseConstructor3" Content="Constructor 3" HorizontalAlignment="Left" Margin="870,104,0,0" VerticalAlignment="Top" Click="ChooseConstructor3_Click"/>
-            <Button x:Name="calculateButton" Content="A^т+B-3*C" HorizontalAlignment="Left" Margin="870,129,0,0" VerticalAlignment="Top" Click="calculateButton_Click"/>
+            <Button x:Name="ChooseMatrixA" FontSize="12" FontFamily="Lucida Console" Content="A" HorizontalAlignment="Left" Margin="853,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseMatrixA_Click"/>
+            <Button x:Name="ChooseMatrixB" FontSize="12" FontFamily="Lucida Console" Content="B" HorizontalAlignment="Left" Margin="853,76,0,0" VerticalAlignment="Top" Click="ChooseMatrixB_Click"/>
+            <Button x:Name="ChooseMatrixC" FontSize="12" FontFamily="Lucida Console" Content="C" HorizontalAlignment="Left" Margin="853,97,0,0" VerticalAlignment="Top" Click="ChooseMatrixC_Click"/>
+            <Button x:Name="ChooseConstructor1" FontSize="12" FontFamily="Lucida Console" Content="Constructor 1" HorizontalAlignment="Left" Margin="870,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseConstructor1_Click"/>
+            <Button x:Name="ChooseConstructor2" FontSize="12" FontFamily="Lucida Console" Content="Constructor 2" HorizontalAlignment="Left" Margin="870,76,0,0" VerticalAlignment="Top" Click="ChooseConstructor2_Click"/>
+            <Button x:Name="ChooseConstructor3" FontSize="12" FontFamily="Lucida Console" Content="Constructor 3" HorizontalAlignment="Left" Margin="870,97,0,0" VerticalAlignment="Top" Click="ChooseConstructor3_Click"/>
+            <Button x:Name="calculateButton" FontSize="12" FontFamily="Lucida Console" Content="A^т+B-3*C" HorizontalAlignment="Left" Margin="899,118,0,0" VerticalAlignment="Top" Click="calculateButton_Click"/>
 
             <Grid x:Name="output" Panel.ZIndex="-1">
                 <Label x:Name="resultLabel" FontSize="16" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="620,139,0,0" VerticalAlignment="Top" BorderBrush="Orange" Background="{x:Null}" BorderThickness="1,1,1,1"/>
@@ -134,8 +134,8 @@
             </Ellipse>
         </Grid>
 
-        <Button x:Name="switchTheme" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Switch Theme" HorizontalAlignment="Right" Margin="0,0,15,15" VerticalAlignment="Bottom" Click="DarkLightToggle_Click"/>
-        <Button x:Name="showHideTaskText" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show-Hide Task Text" HorizontalAlignment="Left" Margin="15,0,0,15" VerticalAlignment="Bottom" Click="showHideTaskText_Click"/>
-        <Button x:Name="showHideEllipses" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show-Hide Ellipses" HorizontalAlignment="Left" Margin="165,0,0,15" VerticalAlignment="Bottom" Click="showHideEllipses_Click"/>
+        <Button x:Name="switchTheme" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Switch Theme" HorizontalAlignment="Right" Margin="0,0,15,15" VerticalAlignment="Bottom" Click="DarkLightToggle_Click"/>
+        <Button x:Name="showHideTaskText" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show-Hide Task Text" HorizontalAlignment="Left" Margin="15,0,0,15" VerticalAlignment="Bottom" Click="showHideTaskText_Click"/>
+        <Button x:Name="showHideEllipses" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show-Hide Ellipses" HorizontalAlignment="Left" Margin="165,0,0,15" VerticalAlignment="Bottom" Click="showHideEllipses_Click"/>
     </Grid>
 </Window>

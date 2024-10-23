@@ -235,7 +235,7 @@ namespace CSharp_Labs_WPF
                     break;
 
                 case "Lab 4: Задания 1, 3":
-                    if (LabChecker.IsPosetiveInt(userValue1.Text))
+                    try
                     {
                         if (!ChooseMatrixA.IsEnabled)
                         {
@@ -251,7 +251,7 @@ namespace CSharp_Labs_WPF
                         }
                         resultLabel.Content = Matrix.MatrixOutput("A B C".Split(' '), A, B, C);
                     }
-                    else
+                    catch
                     {
                         resultLabel.Content = "Incorrect input, try again!";
                     }
@@ -313,7 +313,7 @@ namespace CSharp_Labs_WPF
                     break;
 
                 case "Lab 4: Задание 6":
-                    if (LabChecker.IsPosetiveInt(userValue1.Text))
+                    if (LabChecker.IsDigit(userValue1.Text))
                     {
                         LabFiles.CreateRandomFile("lab4-6.txt", 10, 100);
 
@@ -886,7 +886,7 @@ namespace CSharp_Labs_WPF
                          "\r\nпроверки на онлайн-калькуляторе, чтобы показать," +
                          "\r\nчто выражение посчитано верно. ",
 
-                         "",
+                         "Введите размеры и саму матрицу\n(элеметы идут через пробел)",
                          1,
 
                          "n = ", "m = ", "arr = ");
@@ -944,7 +944,7 @@ namespace CSharp_Labs_WPF
 
                          "",
 
-                         "n = ");
+                         "digit = ");
                     break;
 
                 case "Lab 4: Задание 7":
@@ -1051,27 +1051,40 @@ namespace CSharp_Labs_WPF
 
         private Matrix CreateMatrix()
         {
-            if (!ChooseConstructor1.IsEnabled 
-                 && LabChecker.IsPosetiveInt(userValue2.Text)
-                 && LabChecker.IsRealDuoMatrix(userValue3.Text.Split(' '),
-                    int.Parse(userValue1.Text) * int.Parse(userValue2.Text)))
+            if (LabChecker.IsPosetiveInt(userValue1.Text))
             {
-                return new Matrix(int.Parse(userValue1.Text),
-                                   int.Parse(userValue2.Text),
-                                   LabConverter.StringToIntArr(userValue3.Text.Split(' ')));
-            }
-            if (!ChooseConstructor2.IsEnabled && LabChecker.IsInt(userValue2.Text))
-            {
-                if (userValue3.Text == "")
+                if (!ChooseConstructor1.IsEnabled)
                 {
-                    return new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text));
+                    if (LabChecker.IsPosetiveInt(userValue2.Text) &&
+                        LabChecker.IsRealDuoMatrix(userValue3.Text.Split(' '),
+                        int.Parse(userValue1.Text) * int.Parse(userValue2.Text))
+                       )
+                        return new Matrix(int.Parse(userValue1.Text),
+                                          int.Parse(userValue2.Text),
+                                          LabConverter.StringToIntArr(userValue3.Text.Split(' '))
+                                         );
+                    else
+                    {
+                        throw new Exception("Incorrect values for Matrix");
+                    }
                 }
-                else if (LabChecker.IsInt(userValue3.Text))
+                if (!ChooseConstructor2.IsEnabled)
                 {
-                    return new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text));
+                    if (LabChecker.IsInt(userValue2.Text))
+                    {
+                        return userValue3.Text == "" ?
+                            new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text)) :
+                            new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text));
+                    }
+                    else
+                    {
+                        throw new Exception("Incorrect values for Matrix");
+                    }
                 }
+                if (!ChooseConstructor3.IsEnabled)
+                    return new Matrix(int.Parse(userValue1.Text));
             }
-            return new Matrix(int.Parse(userValue1.Text));
+            throw new Exception("Constructor is unchoosen");
         }
 
         private void calculateButton_Click(object sender, RoutedEventArgs e)

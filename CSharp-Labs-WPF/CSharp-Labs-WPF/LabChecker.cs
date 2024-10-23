@@ -124,5 +124,17 @@ namespace CSharp_Labs_WPF
             }
             return true;
         }
+
+        public static bool IsDigit(string s)
+        {
+            if (int.TryParse(s, out var result))
+            {
+                if (0 <= result && result <= 9)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
