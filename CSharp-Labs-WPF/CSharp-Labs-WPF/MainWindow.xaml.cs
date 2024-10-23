@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -30,9 +31,9 @@ namespace CSharp_Labs_WPF
         string task;
         bool isDarkTheme = true; // 0 - light, 1 - dark
 
-        private Matrix A;
-        private Matrix B;
-        private Matrix C;
+        private Matrix A = new Matrix();
+        private Matrix B = new Matrix();
+        private Matrix C = new Matrix();
         private Matrix D;
 
         public MainWindow()
@@ -40,7 +41,7 @@ namespace CSharp_Labs_WPF
             InitializeComponent();
             if (File.Exists("data.dat"))
             {
-                var f = new StreamReader("data.dat");
+                StreamReader f = new StreamReader("data.dat");
                 task = f.ReadLine();
                 try
                 {
@@ -233,43 +234,120 @@ namespace CSharp_Labs_WPF
                     }
                     break;
 
-                case "Lab 4: Задания 1-3":
+                case "Lab 4: Задания 1, 3":
                     if (LabChecker.IsPosetiveInt(userValue1.Text))
                     {
-                        if (!ChooseConstructor1.IsEnabled)
+                        if (!ChooseMatrixA.IsEnabled)
                         {
-                            if (LabChecker.IsPosetiveInt(userValue2.Text) 
-                             && LabChecker.IsRealDuoMatrix(userValue3.Text.Split(' ')
-                                , int.Parse(userValue1.Text) * int.Parse(userValue2.Text)))
-                            {
-                                D = new Matrix(int.Parse(userValue1.Text),
-                                               int.Parse(userValue2.Text),
-                                               LabConverter.StringToIntArr(userValue3.Text.Split(' ')));
-                                resultLabel.Content = D.ToString();
-                            }
+                            A = CreateMatrix();
                         }
-                        if (!ChooseConstructor2.IsEnabled)
+                        else if (!ChooseMatrixB.IsEnabled)
                         {
-                            if (LabChecker.IsInt(userValue2.Text))
-                            {
-                                if (userValue3.Text == "")
-                                {
-                                    D = new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text));
-                                }
-                                else if (LabChecker.IsInt(userValue3.Text))
-                                {
-                                    D = new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text));
-                                }
-                                resultLabel.Content = D.ToString();
-                            }
+                            B = CreateMatrix();
                         }
-                        if (!ChooseConstructor3.IsEnabled)
+                        else
                         {
-                            D = new Matrix(int.Parse(userValue1.Text));
-                            resultLabel.Content = D.ToString();
+                            C = CreateMatrix();
                         }
+                        resultLabel.Content = Matrix.MatrixOutput("A B C".Split(' '), A, B, C);
                     }
                     else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 4: Задания 2":
+                    if (LabChecker.IsPosetiveInt(userValue1.Text) && 
+                        LabChecker.IsIntArray(userValue2.Text.Split(' ')) && 
+                        LabChecker.IsOneZeroArray(userValue2.Text.Split(' ')) &&
+                        userValue2.Text.Split(' ').Length == 2*int.Parse(userValue1.Text))
+                    {
+                        A = new Matrix(LabConverter.StringToIntArr(userValue2.Text.Split(' ')), 2);
+                        resultLabel.Content = Matrix.WhichDeputiesHaveMore(A);
+                    }
+                    else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 4: Задание 4":
+                    if (LabChecker.IsPosetiveInt(userValue1.Text) && LabChecker.IsInt(userValue2.Text))
+                    {
+                        if (userValue3.Text == "")
+                        {
+                            LabFiles.CreateBinaryFile("lab4-source.bin", int.Parse(userValue1.Text), int.Parse(userValue2.Text));
+                        }
+                        else
+                        {
+                            LabFiles.CreateBinaryFile("lab4-source.bin", int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text));
+                        }
+                        
+                        LabFiles.RemoveDuplicates("lab4-source.bin", "lab4-new.bin");
+                        resultLabel.Content = "Source file: " +LabFiles.BinaryFileToString("lab4-source.bin", "\n", " ");
+                        resultLabel.Content += "\n   New file: " + LabFiles.BinaryFileToString("lab4-new.bin", "\n", " ");
+                    }
+                    else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 4: Задание 5":
+                    if (userValue1.Text != "")
+                        try
+                        {
+                            LabFiles.CreateFileWithToys("lab5-source.bin", userValue1.Text.Split(' '));
+                            resultLabel.Content = "Source file:\n" + LabFiles.BinaryFileToString("lab5-source.bin", "\n", " ",typeof(string), typeof(int), typeof(int), typeof(int));
+                            resultLabel.Content += "\n\nMost Expensive in the Range: " + LabFiles.MostExpensiveInTheRange("lab5-source.bin");
+                        }
+                        catch
+                        {
+                            resultLabel.Content = "Incorrect input, try again!";
+                        }
+                    else
+                    {
+                        resultLabel.Content = "Toys are out, come back later!";
+                    }
+                    break;
+
+                case "Lab 4: Задание 6":
+                    if (LabChecker.IsPosetiveInt(userValue1.Text))
+                    {
+                        LabFiles.CreateRandomFile("lab4-6.txt", 10, 100);
+
+                        resultLabel.Content = "Source file: " + LabFiles.ReadFile("lab4-6.txt");
+                        resultLabel.Content += "\nSum: " + LabFiles.FindSumOfElemsWithGivenEnding("lab4-6.txt", int.Parse(userValue1.Text));
+                    }
+                    else
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 4: Задание 7":
+                    try
+                    {
+                        LabFiles.CreateRandomOneLineFile("lab4-7.txt", 10, 100);
+
+                        resultLabel.Content = "Source file: " + LabFiles.ReadFile("lab4-7.txt");
+                        resultLabel.Content += "\nSum: " + LabFiles.DiffBetweenFirstAndMin("lab4-7.txt");
+                    }
+                    catch 
+                    {
+                        resultLabel.Content = "Error!";
+                    }
+                    break;
+
+                case "Lab 4: Задание 8":
+                    try
+                    {
+                        LabFiles.WriteWithoutPunctuation("lab4-8-source.txt", "lab4-8-new.txt");
+                        resultLabel.Content = "Source file:\n" + LabFiles.ReadFile("lab4-8-source.txt", "\n");
+                        resultLabel.Content += "\n\nPunctuation:\n" + LabFiles.ReadFile("lab4-8-new.txt", "\n");
+                    }
+                    catch
                     {
                         resultLabel.Content = "Incorrect input, try again!";
                     }
@@ -293,6 +371,7 @@ namespace CSharp_Labs_WPF
             ChooseMatrixA.Visibility = Visibility.Hidden;
             ChooseMatrixB.Visibility = Visibility.Hidden;
             ChooseMatrixC.Visibility = Visibility.Hidden;
+            calculateButton.Visibility = Visibility.Hidden;
         }
 
         void TaskChanger(string taskName, string taskText, string entryMessage, uint type = 0, string v1 = "", string v2 = "", string v3 = "")
@@ -302,12 +381,26 @@ namespace CSharp_Labs_WPF
             entryMessageLabel.Content = entryMessage;
             ChangeInputField(v1, v2, v3);
 
-            ChooseConstructor1.Visibility = Visibility.Visible;
-            ChooseConstructor2.Visibility = Visibility.Visible;
-            ChooseConstructor3.Visibility = Visibility.Visible;
-            ChooseMatrixA.Visibility = Visibility.Visible;
-            ChooseMatrixB.Visibility = Visibility.Visible;
-            ChooseMatrixC.Visibility = Visibility.Visible;
+            if (type == 1)
+            {
+                ChooseConstructor1.Visibility = Visibility.Visible;
+                ChooseConstructor2.Visibility = Visibility.Visible;
+                ChooseConstructor3.Visibility = Visibility.Visible;
+                ChooseMatrixA.Visibility = Visibility.Visible;
+                ChooseMatrixB.Visibility = Visibility.Visible;
+                ChooseMatrixC.Visibility = Visibility.Visible;
+                calculateButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ChooseConstructor1.Visibility = Visibility.Hidden;
+                ChooseConstructor2.Visibility = Visibility.Hidden;
+                ChooseConstructor3.Visibility = Visibility.Hidden;
+                ChooseMatrixA.Visibility = Visibility.Hidden;
+                ChooseMatrixB.Visibility = Visibility.Hidden;
+                ChooseMatrixC.Visibility = Visibility.Hidden;
+                calculateButton.Visibility = Visibility.Hidden;
+            }
         }
 
         void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
@@ -777,7 +870,7 @@ namespace CSharp_Labs_WPF
                          "rubles = ", "kopeks = ", "minus kopeks = ");
                     break;
 
-                case "Lab 4: Задания 1-3":
+                case "Lab 4: Задания 1, 3":
                     TaskChanger("Задание 1",
 
                          "Задания 1, 2 и 3 выполнить в виде методов одного класса." +
@@ -797,6 +890,87 @@ namespace CSharp_Labs_WPF
                          1,
 
                          "n = ", "m = ", "arr = ");
+                    break;
+
+                case "Lab 4: Задания 2":
+                    TaskChanger("Задание 2",
+
+                         "В двумерном массиве содержатся результаты " +
+                         "\r\nдвух голосований п депутатов. " +
+                         "\r\nПри голосовании" +
+                         "\r\nтребовалось ответить \"Да\" или \"Нет\". " +
+                         "\r\nПодсчитайте каких депутатов больше: тех, кто оба раза" +
+                         "\r\nпроголосовал одинаково, или тех кто изменил свое решение.",
+
+                         "",
+
+                         "number of deputies = ", "arr(1 or 0) = ");
+                    break;
+
+                case "Lab 4: Задание 4":
+                    TaskChanger("Задание 4",
+
+                         "Из исходного файла получить новый файл," +
+                         "\r\nисключив повторные вхождения чисел." +
+                         "\r\nПорядок следования чисел сохранить.",
+
+                         "",
+
+                         "n = ", "maxValue = ", "minValue = ");
+                    break;
+
+                case "Lab 4: Задание 5":
+                    TaskChanger("Задание 5",
+
+                         "Файл содержит сведения об игрушках: " +
+                         "\r\nназвание игрушки, ее стоимость в рублях и возрастные" +
+                         "\r\nграницы" +
+                         "\r\n(например, игрушка может предназначаться для детей от двух до пяти лет)." +
+                         "\r\nПолучить название самой дорогой игрушки, подходящей детям двух-трех лет.",
+
+                         "",
+
+                         "toys names = ");
+                    break;
+
+                case "Lab 4: Задание 6":
+                    TaskChanger("Задание 6",
+
+                         "Найти сумму элементов, " +
+                         "\r\nоканчивающихся на заданную цифру" +
+                         "\r\nВ задании 6 в текстовом файле хранятся целые числа по одному в строке," +
+                         "\r\nисходный файл необходимо заполнить случайными данными, " +
+                         "\r\nзаполнение организовать отдельным методом.",
+
+                         "",
+
+                         "n = ");
+                    break;
+
+                case "Lab 4: Задание 7":
+                    TaskChanger("Задание 7",
+
+                         "Решить задачу с использованием структуры «текстовый файл»" +
+                         "\r\nНайти разность первого и минимального элементов." +
+                         "\r\nВ задании 7 в текстовом файле хранятся целые числа по несколько в строке," +
+                         "\r\nисходный файл необходимо заполнить случайными данными, " +
+                         "\r\nзаполнение организовать отдельным методом.",
+
+                         "",
+
+                         0);
+                    break;
+
+                case "Lab 4: Задание 8":
+                    TaskChanger("Задание 8",
+
+                         "Текстовый файл" +
+                         "\r\nПереписать в другой файл строки, в которых нет знаков препинания" +
+                         "\r\nВ задании 8 в текстовом файле хранится текст.",
+
+                         "", 
+                         
+                         0);
                     break;
 
                 default:
@@ -873,6 +1047,43 @@ namespace CSharp_Labs_WPF
             ChooseMatrixB.IsEnabled = true;
             ChooseMatrixC.IsEnabled = false;
             D = C;
+        }
+
+        private Matrix CreateMatrix()
+        {
+            if (!ChooseConstructor1.IsEnabled 
+                 && LabChecker.IsPosetiveInt(userValue2.Text)
+                 && LabChecker.IsRealDuoMatrix(userValue3.Text.Split(' '),
+                    int.Parse(userValue1.Text) * int.Parse(userValue2.Text)))
+            {
+                return new Matrix(int.Parse(userValue1.Text),
+                                   int.Parse(userValue2.Text),
+                                   LabConverter.StringToIntArr(userValue3.Text.Split(' ')));
+            }
+            if (!ChooseConstructor2.IsEnabled && LabChecker.IsInt(userValue2.Text))
+            {
+                if (userValue3.Text == "")
+                {
+                    return new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text));
+                }
+                else if (LabChecker.IsInt(userValue3.Text))
+                {
+                    return new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text));
+                }
+            }
+            return new Matrix(int.Parse(userValue1.Text));
+        }
+
+        private void calculateButton_Click(object sender, RoutedEventArgs e)
+        {            
+            try
+            {
+                resultLabel.Content = resultLabel.Content + "\nA^т+B-3*C:\n" + (Matrix.Transpose(A) + B - 3 * C).ToString();
+            }
+            catch (Exception ex)
+            {
+                resultLabel.Content = resultLabel.Content + "\nA^т+B-3*C:\n" + ex.Message;
+            }
         }
     }
 }

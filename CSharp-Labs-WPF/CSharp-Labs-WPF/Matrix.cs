@@ -11,9 +11,19 @@ namespace CSharp_Labs_WPF
     {
         private int[,] matrix;
 
-        public Matrix(int[,] maxtrix)
+        public Matrix()
         {
-            this.matrix = maxtrix;
+            matrix = new int[0,0];
+        }
+
+        public Matrix(Matrix M)
+        {
+            matrix = M.matrix;
+        }
+
+        public Matrix(int[,] M)
+        {
+            matrix = M;
         }
 
         public Matrix(int n, int m, int[] arr)
@@ -46,7 +56,19 @@ namespace CSharp_Labs_WPF
             }
         }
 
-        public Matrix(int n, int maxValue, int minValue)
+        public Matrix(int[] arr, int m)
+        {
+            matrix = new int[arr.Length/m, m];
+            for (int i = 0, k = 0; i < arr.Length / m; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    matrix[i, j] = arr[k++];
+                }
+            }
+        }
+
+        public Matrix(int n, int maxValue, int minValue = 0)
         {
             matrix = new int[n, n];
             Random rand = new Random();
@@ -75,25 +97,6 @@ namespace CSharp_Labs_WPF
             }
         }
 
-        public Matrix(int n, int maxValue)
-        {
-            matrix = new int[n, n];
-            Random rand = new Random();
-
-            for (int i = 0; i < n; i++)
-            {
-                matrix[i, 0] = rand.Next(n - 1, maxValue);
-            }
-
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 1; j < n; j++)
-                {
-                    matrix[i, j] = rand.Next(n - j - 1, matrix[i, j - 1]);
-                }
-            }
-        }
-
         public Matrix(int n)
         {
             matrix = new int[n, n];
@@ -114,18 +117,42 @@ namespace CSharp_Labs_WPF
             }
         }
 
-        public void Transpose()
+        public static string WhichDeputiesHaveMore(Matrix VotesOfDeputaties)
         {
-            int[,] Tmatrix = new int[matrix.GetLength(1), matrix.GetLength(0)];
-
-            for (int i = 0; i < matrix.GetLength(1); i++)
+            if (VotesOfDeputaties == null)
             {
-                for (int j = 0; j < matrix.GetLength(0); j++)
+                throw new ArgumentNullException();
+            }
+            if (VotesOfDeputaties.matrix.GetLength(1) != 2) 
+            {
+                throw new AccessViolationException("Count of Rows != 2");
+            }
+
+            int countMonoVotes = 0;
+            for (int i = 0; i < VotesOfDeputaties.matrix.GetLength(0); i++)
+            {
+                if (VotesOfDeputaties.matrix[i, 0] == VotesOfDeputaties.matrix[i, 1])
                 {
-                    Tmatrix[i, j] = matrix[j, i];
+                    countMonoVotes++;
                 }
             }
-            matrix = Tmatrix;
+            return countMonoVotes > VotesOfDeputaties.matrix.GetLength(0) - countMonoVotes ? 
+                "Тех, кто проголосовал одинаково больше" :
+                "Тех, кто изменил решение больше";
+        }
+
+        public static Matrix Transpose(Matrix M)
+        {
+            int[,] Tmatrix = new int[M.matrix.GetLength(1), M.matrix.GetLength(0)];
+
+            for (int i = 0; i < M.matrix.GetLength(1); i++)
+            {
+                for (int j = 0; j < M.matrix.GetLength(0); j++)
+                {
+                    Tmatrix[i, j] = M.matrix[j, i];
+                }
+            }
+            return new Matrix(Tmatrix);
         }
 
         public static Matrix operator +(Matrix A, Matrix B)
@@ -174,58 +201,73 @@ namespace CSharp_Labs_WPF
             return A;
         }
 
-        // 1 2 3 - 1 4 7 3
-        // 4 5 6 - 2 5 8 2
-        // 7 8 9 - 3 6 9 1
-        // 3 2 1
+        public static string MatrixOutput(string[] names, params Matrix[] M)
+        {
+            string result = "";
+            for (int i = 0; i < M.Length; i++)
+            {
+                result += names[i] + ":" + '\n';
+                if (M[i].ToString() != "")
+                {
+                    result += M[i].ToString();
+                }
+                else
+                {
+                    result += "Matrix is empty";
+                }               
+                result += "\n\n";
+            }
+            return result;
+        }
 
         public override string ToString()
         {
-            //int[] maxLen = new int[matrix.GetLength(1)];
-            //for (int j = 0; j < matrix.GetLength(1); j++)
-            //{
-            //    for (int i = 0; i < matrix.GetLength(0); i++)
-            //    {
-            //        maxLen[j] = Math.Max(matrix[i, j].ToString().Length, maxLen[j]);
-            //    }
-            //}
+            int[] maxLen = new int[matrix.GetLength(1)];
+            for (int j = 0; j < matrix.GetLength(1); j++)
+            {
+                for (int i = 0; i < matrix.GetLength(0); i++)
+                {
+                    maxLen[j] = Math.Max(matrix[i, j].ToString().Length, maxLen[j]);
+                }
+            }
 
-            //string result = "";
+            string result = "";
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    for (int k = 0; k < maxLen[j] - matrix[i, j].ToString().Length; k++)
+                    {
+                        result += " ";
+                    }
+                    result += matrix[i, j].ToString() + " ";
+                }
+                if (i != matrix.GetLength(0) - 1)
+                    result += "\n";
+            }
+            return result;
+
+            //int maxLength = 0;
             //for (int i = 0; i < matrix.GetLength(0); i++)
             //{
             //    for (int j = 0; j < matrix.GetLength(1); j++)
             //    {
-            //        for (int k = 0; k < maxLen[j]-matrix[i, j].ToString().Length; k++)
-            //        {
-            //            result += " ";
-            //        }
-            //        result += matrix[i, j].ToString() + " ";
+            //        maxLength = Math.Max(maxLength, matrix[i, j].ToString().Length);
             //    }
-            //    result += "\n";
             //}
-            //return result;
 
-            int maxLength = 0;
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < matrix.GetLength(1); j++)
-                {
-                    maxLength = Math.Max(maxLength, matrix[i, j].ToString().Length);
-                }
-            }
+            //string[] matrixLines = new string[matrix.GetLength(0)];
 
-            string[] matrixLines = new string[matrix.GetLength(0)];
-
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                string line = "";
-                for (int j = 0; j < matrix.GetLength(1); j++)
-                {
-                    line += matrix[i, j].ToString().PadLeft(maxLength + 1) + " ";
-                }
-                matrixLines[i] = line;
-            }
-            return string.Join(Environment.NewLine, matrixLines);
+            //for (int i = 0; i < matrix.GetLength(0); i++)
+            //{
+            //    string line = "";
+            //    for (int j = 0; j < matrix.GetLength(1); j++)
+            //    {
+            //        line += matrix[i, j].ToString().PadLeft(maxLength + 1) + " ";
+            //    }
+            //    matrixLines[i] = line;
+            //}
+            //return string.Join(Environment.NewLine, matrixLines);
         }
     }
 }

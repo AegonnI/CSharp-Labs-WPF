@@ -10,39 +10,48 @@
 
     <Window.Resources>
         <ResourceDictionary x:Name="Theme" Source="Themes/Dark.xaml"/>
+
     </Window.Resources>
+
+
 
     <Grid x:Name="mainGrid" Background="{DynamicResource Background}">
 
         <Grid x:Name="TaskBox">
-            <Label x:Name="taskNameLabel" FontSize="16" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="taskTextLabel" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
+            <Label x:Name="taskNameLabel" FontSize="16" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="taskTextLabel" FontSize="12" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
         </Grid>
 
-        <ComboBox x:Name="tasksComboBox" FontSize="12" FontFamily="Arial Black" HorizontalAlignment="Right" Margin="0,23,15,0" VerticalAlignment="Top" Width="223" SelectionChanged="Tasks_SelectionChanged" IsReadOnly="True" Foreground="{DynamicResource Foreground}" Background="{x:Null}">
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 1"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 3"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 5"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 7"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 1. Методы: 9"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 1"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 3"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 5"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 7"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 2. Условия: 9"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 1"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 3"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 5"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 7"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 3. Циклы: 9"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 1"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 3"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 5"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 7"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 1: Задание 4. Массивы: 9"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 2: Задание 13"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 3: Задание 1"/>
-            <ComboBoxItem Background="{DynamicResource SecondBackground}" Content="Lab 4: Задания 1-3"/>
+        <ComboBox x:Name="tasksComboBox" FontSize="12" FontFamily="Arial Black" HorizontalAlignment="Right" Margin="0,23,15,0" VerticalAlignment="Top" Width="223" SelectionChanged="Tasks_SelectionChanged" IsReadOnly="True" Background="{x:Null}">
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 1"/>
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 3"/>
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 5"/>
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 7"/>
+            <ComboBoxItem Content="Lab 1: Задание 1. Методы: 9"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 1"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 3"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 5"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 7"/>
+            <ComboBoxItem Content="Lab 1: Задание 2. Условия: 9"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 1"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 3"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 5"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 7"/>
+            <ComboBoxItem Content="Lab 1: Задание 3. Циклы: 9"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 1"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 3"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 5"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 7"/>
+            <ComboBoxItem Content="Lab 1: Задание 4. Массивы: 9"/>
+            <ComboBoxItem Content="Lab 2: Задание 13"/>
+            <ComboBoxItem Content="Lab 3: Задание 1"/>
+            <ComboBoxItem Content="Lab 4: Задания 1, 3"/>
+            <ComboBoxItem Content="Lab 4: Задания 2"/>
+            <ComboBoxItem Content="Lab 4: Задание 4"/>
+            <ComboBoxItem Content="Lab 4: Задание 5"/>
+            <ComboBoxItem Content="Lab 4: Задание 6"/>
+            <ComboBoxItem Content="Lab 4: Задание 7"/>
+            <ComboBoxItem Content="Lab 4: Задание 8"/>
         </ComboBox>
 
         <Grid x:Name="inputAndOutput">
@@ -53,13 +62,13 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="userValue1" Grid.Column="1" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,57,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="userValue2" Grid.Column="1" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,80,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="userValue3" Grid.Column="1" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,103,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="userValue1" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,57,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="userValue2" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,80,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="userValue3" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" HorizontalAlignment="Right" Margin="0,103,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
-                    <Label x:Name="valueName1" Grid.Column="0" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,52,0,0" VerticalAlignment="Top" Height="25"/>
-                    <Label x:Name="valueName2" Grid.Column="0" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,75,0,0" VerticalAlignment="Top" Height="25"/>
-                    <Label x:Name="valueName3" Grid.Column="0" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,98,0,0" VerticalAlignment="Top" Height="25"/>
+                    <Label x:Name="valueName1" Grid.Column="0" FontSize="14" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,52,0,0" VerticalAlignment="Top" Height="25"/>
+                    <Label x:Name="valueName2" Grid.Column="0" FontSize="14" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,75,0,0" VerticalAlignment="Top" Height="25"/>
+                    <Label x:Name="valueName3" Grid.Column="0" FontSize="14" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,98,0,0" VerticalAlignment="Top" Height="25"/>
 
                     <Button x:Name="showResultButton" Grid.Column="2" FontSize="12" FontFamily="Arial Black" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Right" Margin="0,57,370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
                 </Grid>
@@ -67,12 +76,13 @@
                 <Label x:Name="entryMessageLabel" FontSize="12" FontFamily="Arial Black" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
             </Grid>
 
-            <Button x:Name="ChooseMatrixA" Content="A" HorizontalAlignment="Left" Margin="840,228,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseMatrixA_Click"/>
-            <Button x:Name="ChooseMatrixB" Content="B" HorizontalAlignment="Left" Margin="840,252,0,0" VerticalAlignment="Top" Click="ChooseMatrixB_Click"/>
-            <Button x:Name="ChooseMatrixC" Content="C" HorizontalAlignment="Left" Margin="840,277,0,0" VerticalAlignment="Top" Click="ChooseMatrixC_Click"/>
-            <Button x:Name="ChooseConstructor1" Content="Constructor 1" HorizontalAlignment="Left" Margin="857,228,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseConstructor1_Click"/>
-            <Button x:Name="ChooseConstructor2" Content="Constructor 2" HorizontalAlignment="Left" Margin="857,252,0,0" VerticalAlignment="Top" Click="ChooseConstructor2_Click"/>
-            <Button x:Name="ChooseConstructor3" Content="Constructor 3" HorizontalAlignment="Left" Margin="857,277,0,0" VerticalAlignment="Top" Click="ChooseConstructor3_Click"/>
+            <Button x:Name="ChooseMatrixA" Content="A" HorizontalAlignment="Left" Margin="853,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseMatrixA_Click"/>
+            <Button x:Name="ChooseMatrixB" Content="B" HorizontalAlignment="Left" Margin="853,79,0,0" VerticalAlignment="Top" Click="ChooseMatrixB_Click"/>
+            <Button x:Name="ChooseMatrixC" Content="C" HorizontalAlignment="Left" Margin="853,104,0,0" VerticalAlignment="Top" Click="ChooseMatrixC_Click"/>
+            <Button x:Name="ChooseConstructor1" Content="Constructor 1" HorizontalAlignment="Left" Margin="870,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseConstructor1_Click"/>
+            <Button x:Name="ChooseConstructor2" Content="Constructor 2" HorizontalAlignment="Left" Margin="870,79,0,0" VerticalAlignment="Top" Click="ChooseConstructor2_Click"/>
+            <Button x:Name="ChooseConstructor3" Content="Constructor 3" HorizontalAlignment="Left" Margin="870,104,0,0" VerticalAlignment="Top" Click="ChooseConstructor3_Click"/>
+            <Button x:Name="calculateButton" Content="A^т+B-3*C" HorizontalAlignment="Left" Margin="870,129,0,0" VerticalAlignment="Top" Click="calculateButton_Click"/>
 
             <Grid x:Name="output" Panel.ZIndex="-1">
                 <Label x:Name="resultLabel" FontSize="16" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="620,139,0,0" VerticalAlignment="Top" BorderBrush="Orange" Background="{x:Null}" BorderThickness="1,1,1,1"/>

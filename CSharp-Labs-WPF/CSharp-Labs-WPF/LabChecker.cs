@@ -108,5 +108,21 @@ namespace CSharp_Labs_WPF
         {
             return IsIntArray(arr) && LabConverter.StringToIntArr(arr).Length == nm;
         }
+
+        public static bool IsOneZeroArray(string[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (!IsIntNumber(arr[i]))
+                {
+                    return false;
+                }
+                if (int.Parse(arr[i]) < 0 || int.Parse(arr[i]) > 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
