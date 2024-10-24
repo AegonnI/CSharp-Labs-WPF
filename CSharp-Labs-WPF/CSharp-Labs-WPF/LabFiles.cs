@@ -5,6 +5,7 @@ using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -28,51 +29,64 @@ namespace CSharp_Labs_WPF
         // Записывает в файл все строки без знаков препирания
         public static void WriteWithoutPunctuation(string sourceFilePath, string newFilePath)
         {
-            StreamReader sourceFile = new StreamReader(sourceFilePath);
-            StreamWriter newFile = new StreamWriter(newFilePath);
-
-            while (!sourceFile.EndOfStream)
+            if (File.Exists(sourceFilePath))
             {
-                string line = sourceFile.ReadLine();
-                if (line.IndexOfAny(".,;:!?-()<>".ToCharArray()) == -1)
+                StreamReader sourceFile = new StreamReader(sourceFilePath);
+                StreamWriter newFile = new StreamWriter(newFilePath);
+
+                while (!sourceFile.EndOfStream)
                 {
-                    newFile.WriteLine(line);
+                    string line = sourceFile.ReadLine();
+                    if (line.IndexOfAny(".,;:!?-()<>".ToCharArray()) == -1)
+                    {
+                        newFile.WriteLine(line);
+                    }
                 }
+                sourceFile.Close(); newFile.Close();
             }
-            sourceFile.Close(); newFile.Close();
         }
 
         // Ex7
         // Находит разницу между первым и минимальным
         public static int DiffBetweenFirstAndMin(string fileName)
         {
-            StreamReader file = new StreamReader(fileName);
-            string[] numbs = file.ReadToEnd().Split(' ');
-            int first = int.Parse(numbs[0]);    
-            int min = first;
-            for (int i = 1; i < numbs.Length-1; i++)
+            if (File.Exists(fileName))
             {
-                min = Math.Min(min, int.Parse(numbs[i]));
+                StreamReader file = new StreamReader(fileName);
+                string[] numbs = file.ReadToEnd().Split(' ');
+                int first = int.Parse(numbs[0]);
+                int min = first;
+                for (int i = 1; i < numbs.Length - 1; i++)
+                {
+                    min = Math.Min(min, int.Parse(numbs[i]));
+                }
+                file.Close();
+                return first - min;
             }
-            return first - min;
+            throw new Exception("file not found");
         }
 
         // Ex6
         // Находит сумму элементов, оканчивающихся на заданное значение
         public static int FindSumOfElemsWithGivenEnding(string fileName, int ending)
         {
-            StreamReader file = new StreamReader(fileName);
-            int sum = 0;
-            while (!file.EndOfStream)
+            if (File.Exists(fileName))
             {
-                int num = int.Parse(file.ReadLine());
-                if (num % Math.Pow(10, (num.ToString().Length-1)) == ending || num == ending)
+                StreamReader file = new StreamReader(fileName);
+                int sum = 0;
+                while (!file.EndOfStream)
                 {
-                    sum += num;
+                    int num = int.Parse(file.ReadLine());
+                    if (num % Math.Pow(10, (num.ToString().Length - 1)) == ending || num == ending)
+                    {
+                        sum += num;
+                    }
                 }
+                file.Close();
+                return sum;
             }
-            file.Close();
-            return sum;
+            throw new Exception("file not found");
+
         }
 
         // Создает файл с рандомными значениями(по одному в строке)
@@ -102,14 +116,18 @@ namespace CSharp_Labs_WPF
         // Возвращает строку с элементами файла
         public static string ReadFile(string fileName, string separator = " ")
         {
-            StreamReader file = new StreamReader(fileName);
-            List<string> list = new List<string>();
-            while (!file.EndOfStream)
+            if (File.Exists(fileName))
             {
-                list.Add(file.ReadLine());
+                StreamReader file = new StreamReader(fileName);
+                List<string> list = new List<string>();
+                while (!file.EndOfStream)
+                {
+                    list.Add(file.ReadLine());
+                }
+                file.Close();
+                return string.Join(separator, list.ToArray());
             }
-            file.Close();
-            return string.Join(separator, list.ToArray());
+            throw new Exception("file not found");
         }
 
         // Binary Files
@@ -117,6 +135,8 @@ namespace CSharp_Labs_WPF
         // Находит название игрушки с самой большой ценой из заданного диапазона
         public static string MostExpensiveInTheRange(string sourceFilePath)
         {
+            if (!File.Exists(sourceFilePath)) throw new Exception("file not found");
+
             string name = "No one";
             int maxPrice = 0;
             using (FileStream soursceFile = new FileStream(sourceFilePath, FileMode.Open))
@@ -166,6 +186,8 @@ namespace CSharp_Labs_WPF
         // Создает новый бинарный файл без дубликатов исходного файла
         public static void RemoveDuplicates(string sourceFilePath, string newFilePath)
         {
+            if (!File.Exists(sourceFilePath)) throw new Exception("file not found");
+
             using (FileStream soursceFile = new FileStream(sourceFilePath, FileMode.Open))
             {
                 BinaryReader reader = new BinaryReader(soursceFile);
@@ -189,6 +211,8 @@ namespace CSharp_Labs_WPF
         // Возвращает строку с элементами бинарного файла
         public static string BinaryFileToString(string filePath, string separator, string splitter, params Type[] types)
         {
+            if (!File.Exists(filePath)) throw new Exception("file not found");
+
             string result = "";
             using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
             {
