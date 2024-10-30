@@ -34,7 +34,6 @@ namespace CSharp_Labs_WPF
         private Matrix A = new Matrix();
         private Matrix B = new Matrix();
         private Matrix C = new Matrix();
-        private Matrix D;
 
         public MainWindow()
         {
