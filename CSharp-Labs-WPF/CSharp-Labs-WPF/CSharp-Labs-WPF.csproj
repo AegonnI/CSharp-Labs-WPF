@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Lab2v13Extended.cs" />
+    <Compile Include="Lab5.cs" />
     <Compile Include="LabFiles.cs" />
     <Compile Include="Matrix.cs" />
     <Compile Include="Money.cs" />

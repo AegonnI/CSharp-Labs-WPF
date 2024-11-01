@@ -1029,7 +1029,6 @@ namespace CSharp_Labs_WPF
             ChooseMatrixA.IsEnabled = false;
             ChooseMatrixB.IsEnabled = true;
             ChooseMatrixC.IsEnabled = true;
-            D = A;
         }
 
         private void ChooseMatrixB_Click(object sender, RoutedEventArgs e)
@@ -1037,7 +1036,6 @@ namespace CSharp_Labs_WPF
             ChooseMatrixA.IsEnabled = true;
             ChooseMatrixB.IsEnabled = false;
             ChooseMatrixC.IsEnabled = true;
-            D = B;
         }
 
         private void ChooseMatrixC_Click(object sender, RoutedEventArgs e)
@@ -1045,7 +1043,6 @@ namespace CSharp_Labs_WPF
             ChooseMatrixA.IsEnabled = true;
             ChooseMatrixB.IsEnabled = true;
             ChooseMatrixC.IsEnabled = false;
-            D = C;
         }
 
         private Matrix CreateMatrix()
