@@ -238,15 +238,15 @@ namespace CSharp_Labs_WPF
                     {
                         if (!ChooseMatrixA.IsEnabled)
                         {
-                            A = CreateMatrix();
+                            A = VisualChanger.CreateMatrix(userValue1, userValue2, userValue3, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3);
                         }
                         else if (!ChooseMatrixB.IsEnabled)
                         {
-                            B = CreateMatrix();
+                            B = VisualChanger.CreateMatrix(userValue1, userValue2, userValue3, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3);
                         }
                         else
                         {
-                            C = CreateMatrix();
+                            C = VisualChanger.CreateMatrix(userValue1, userValue2, userValue3, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3);
                         }
                         resultLabel.Content = Matrix.MatrixOutput("A B C".Split(' '), A, B, C);
                     }
@@ -352,6 +352,78 @@ namespace CSharp_Labs_WPF
                     }
                     break;
 
+                case "Lab 5: Задание 1":
+                    try
+                    {
+                        List<string> L1 = new List<string>(userValue1.Text.Split(' '));
+                        List<string> L2 = new List<string>(userValue2.Text.Split(' '));
+                        resultLabel.Content = string.Join(" ", Lab5.SymmetricalDifference(L1, L2));
+                    }
+                    catch
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 5: Задание 2":
+                    try
+                    {
+                        LinkedList<string> L = new LinkedList<string>(userValue1.Text.Split(' '));
+                        resultLabel.Content = string.Join(" ", Lab5.DeleteAllBetweenMinMax(L));
+                    }
+                    catch
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 5: Задание 3":
+                    try
+                    {
+
+                    }
+                    catch
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 5: Задание 4":
+                    try
+                    {
+                        resultLabel.Content = string.Join(" ", Lab5.DigintsInText("Lab5-3.txt"));
+                        
+                        
+                    }
+                    catch
+                    {
+                        //resultLabel.Content = E;
+                        resultLabel.Content = "problems with the file";
+                    }
+                    break;
+
+                case "Lab 5: Задание 5":
+                    try
+                    {
+
+                    }
+                    catch
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
+                case "Lab 5: Задание 6":
+                    try
+                    {
+                        Lab5.CreateToysFile("A", "B", "C", "D");
+                    }
+                    catch
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                    }
+                    break;
+
                 default:
                     break;
             }
@@ -364,13 +436,8 @@ namespace CSharp_Labs_WPF
             entryMessageLabel.Content = entryMessage;
             ChangeInputField(v1, v2, v3);
 
-            ChooseConstructor1.Visibility = Visibility.Hidden;
-            ChooseConstructor2.Visibility = Visibility.Hidden;
-            ChooseConstructor3.Visibility = Visibility.Hidden;
-            ChooseMatrixA.Visibility = Visibility.Hidden;
-            ChooseMatrixB.Visibility = Visibility.Hidden;
-            ChooseMatrixC.Visibility = Visibility.Hidden;
-            calculateButton.Visibility = Visibility.Hidden;
+            VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
+                                               ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
         }
 
         void TaskChanger(string taskName, string taskText, string entryMessage, uint type = 0, string v1 = "", string v2 = "", string v3 = "")
@@ -382,23 +449,13 @@ namespace CSharp_Labs_WPF
 
             if (type == 1)
             {
-                ChooseConstructor1.Visibility = Visibility.Visible;
-                ChooseConstructor2.Visibility = Visibility.Visible;
-                ChooseConstructor3.Visibility = Visibility.Visible;
-                ChooseMatrixA.Visibility = Visibility.Visible;
-                ChooseMatrixB.Visibility = Visibility.Visible;
-                ChooseMatrixC.Visibility = Visibility.Visible;
-                calculateButton.Visibility = Visibility.Visible;
+                VisualChanger.ChangeVisible(true, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3, 
+                                                  ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
             }
             else
             {
-                ChooseConstructor1.Visibility = Visibility.Hidden;
-                ChooseConstructor2.Visibility = Visibility.Hidden;
-                ChooseConstructor3.Visibility = Visibility.Hidden;
-                ChooseMatrixA.Visibility = Visibility.Hidden;
-                ChooseMatrixB.Visibility = Visibility.Hidden;
-                ChooseMatrixC.Visibility = Visibility.Hidden;
-                calculateButton.Visibility = Visibility.Hidden;
+                VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
+                                                   ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
             }
         }
 
@@ -972,6 +1029,119 @@ namespace CSharp_Labs_WPF
                          0);
                     break;
 
+                case "Lab 5: Задание 1":
+                    TaskChanger("Задание 1",
+
+                         "Решить задачу, используя класс List" +
+                         "\r\nСоставить программу, которая формирует список L" +
+                         "\r\nвключив в него по одному разу элементы," +
+                         "\r\nкоторые входят в один из списков L1 и L2," +
+                         "\r\nно в то же время не входит в другой из них",
+
+                         "Введите два списка",
+
+                         "L1 = ", "L2 = ");
+                    break;
+
+                case "Lab 5: Задание 2":
+                    TaskChanger("Задание 2",
+
+                         "Решить задачу, используя класс LinkedList" +
+                         "\r\nудалить все элементы " +
+                         "\r\nмежду минимальным и максимальным элементами;",
+
+                         "Введите список",
+
+                         "L = ");
+                    break;
+
+                case "Lab 5: Задание 3":
+                    TaskChanger("Задание 3",
+
+                         "Решить задачу, используя класс HashSet" +
+                         "\r\nЕсть перечень названий телевизионных шоу." +
+                         "\r\nОпределить для каждого наименования шоу," +
+                         "\r\nкакие из них нравятся всем n телезрителям," +
+                         "\r\nкакие — некоторым из телезрителей," +
+                         "\r\nи какие — никому из телезрителей.",
+
+                         "Введите список",
+
+                         "?");
+                    break;
+
+                case "Lab 5: Задание 4":
+                    TaskChanger("Задание 4",
+
+                         "Решить задачу, используя класс HashSet" +
+                         "\r\nДан текстовый файл." +
+                         "\r\nОбработать содержимое файла с использованием HashSet." +
+                         "\r\nФайл содержит текст на русском языке. " +
+                         "\r\nКакие цифры встречаются в тексте?",
+
+                         "",
+
+                         0);
+                    break;
+
+                case "Lab 5: Задание 5":
+                    TaskChanger("Задание 5",
+
+                         "Решить задачу, используя класс Dictionary" +
+                         "\r\n(или класс SortedList)" +
+                         "\r\nРешить текстовую задачу с использованием словаря " +
+                         "\r\n(входные данные читать из текстового файла)" +
+                         "\r\nИмеется список людей с указанием их фамилии, " +
+                         "\r\nимени и даты рождения." +
+                         "\r\nНапишите программу,которая будет определять" +
+                         "\r\nсамого старшего человека из этого списка" +
+                         "\r\nи выводить его фамилию и имя," +
+                         "\r\nа если имеется несколько самых старших людей" +
+                         "\r\nс одинаковой датой рождения," +
+                         "\r\nто определять их количество." +
+                         "\r\nНа вход программе в первой строке" +
+                         "\r\nподается количество людей в списке N." +
+                         "\r\nВ каждой изпоследующих N строк находится" +
+                         "\r\nинформация в следующем формате:" +
+                         "\r\n<Фамилия> <Имя> <Дата рождения>" +
+                         "\r\nгде <Фамилия> – строка, состоящая не более," +
+                         "\r\nчем из 20 символов без пробелов, <Имя> – строка," +
+                         "\r\nсостоящая не более, чем из 20 символов без пробелов," +
+                         "\r\n<Дата рождения> – строка, имеющая вид" +
+                         "\r\nДД.ММ.ГГГГ, где ДД – двузначное число от 01 до 31," +
+                         "\r\nММ – двузначное число от 01 до 12, ГГГГ –" +
+                         "\r\nчетырехзначное число от 1800 до 2100." +
+                         "\r\nПример входной строки:" +
+                         "\r\nИванов Сергей 27.03.1993" +
+                         "\r\nПрограмма должна вывести фамилию и имя" +
+                         "\r\nсамого старшего человека в списке." +
+                         "\r\nПример выходных данных:" +
+                         "\r\nИванов Сергей" +
+                         "\r\nЕсли таких людей, несколько," +
+                         "\r\nто программа должна вывести их количество." +
+                         "\r\nПример вывода в" +
+                         "\r\nэтом случае:" +
+                         "\r\n3",
+
+                         "",
+
+                         0);
+                    break;
+
+                case "Lab 5: Задание 6":
+                    TaskChanger("Задание 6",
+
+                         "XML – cериализация и коллекции" +
+                         "\r\nФайл содержит сведения об игрушках:" +
+                         "\r\nназвание игрушки, ее стоимость в рублях и возрастные" +
+                         "\r\nграницы (например, игрушка может предназначаться для детей от двух до пяти лет)." +
+                         "\r\nПолучить название самой дорогой игрушки, подходящей детям двух-трех лет.",
+
+                         "",
+
+                         0);
+                    break;
+
                 default:
                     break;
             }
@@ -1043,44 +1213,6 @@ namespace CSharp_Labs_WPF
             ChooseMatrixA.IsEnabled = true;
             ChooseMatrixB.IsEnabled = true;
             ChooseMatrixC.IsEnabled = false;
-        }
-
-        private Matrix CreateMatrix()
-        {
-            if (LabChecker.IsPosetiveInt(userValue1.Text))
-            {
-                if (!ChooseConstructor1.IsEnabled)
-                {
-                    if (LabChecker.IsPosetiveInt(userValue2.Text) &&
-                        LabChecker.IsRealDuoMatrix(userValue3.Text.Split(' '),
-                        int.Parse(userValue1.Text) * int.Parse(userValue2.Text))
-                       )
-                        return new Matrix(int.Parse(userValue1.Text),
-                                          int.Parse(userValue2.Text),
-                                          LabConverter.StringToIntArr(userValue3.Text.Split(' '))
-                                         );
-                    else
-                    {
-                        throw new Exception("Incorrect values for Matrix");
-                    }
-                }
-                if (!ChooseConstructor2.IsEnabled)
-                {
-                    if (LabChecker.IsInt(userValue2.Text))
-                    {
-                        return userValue3.Text == "" ?
-                            new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text)) :
-                            new Matrix(int.Parse(userValue1.Text), int.Parse(userValue2.Text), int.Parse(userValue3.Text));
-                    }
-                    else
-                    {
-                        throw new Exception("Incorrect values for Matrix");
-                    }
-                }
-                if (!ChooseConstructor3.IsEnabled)
-                    return new Matrix(int.Parse(userValue1.Text));
-            }
-            throw new Exception("Constructor is unchoosen");
         }
 
         private void calculateButton_Click(object sender, RoutedEventArgs e)

@@ -52,6 +52,12 @@
             <ComboBoxItem Content="Lab 4: Задание 6"/>
             <ComboBoxItem Content="Lab 4: Задание 7"/>
             <ComboBoxItem Content="Lab 4: Задание 8"/>
+            <ComboBoxItem Content="Lab 5: Задание 1"/>
+            <ComboBoxItem Content="Lab 5: Задание 2"/>
+            <ComboBoxItem Content="Lab 5: Задание 3"/>
+            <ComboBoxItem Content="Lab 5: Задание 4"/>
+            <ComboBoxItem Content="Lab 5: Задание 5"/>
+            <ComboBoxItem Content="Lab 5: Задание 6"/>
         </ComboBox>
 
         <Grid x:Name="inputAndOutput">
