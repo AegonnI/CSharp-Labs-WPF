@@ -393,7 +393,7 @@ namespace CSharp_Labs_WPF
                 case "Lab 5: Задание 4":
                     try
                     {
-                        resultLabel.Content = string.Join(" ", Lab5.DigintsInText("Lab5-3.txt"));                 
+                        resultLabel.Content = string.Join(" ", Lab5.DigintsInText("Lab5-4.txt"));                 
                     }
                     catch
                     {
