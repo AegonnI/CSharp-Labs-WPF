@@ -77,6 +77,7 @@
                     <Label x:Name="valueName3" Grid.Column="0" FontSize="14" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Right" Margin="0,98,0,0" VerticalAlignment="Top" Height="25"/>
 
                     <Button x:Name="showResultButton" Grid.Column="2" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Right" Margin="0,57,370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
+                    <Button x:Name="secondShowResultButton" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Записать Предпочтения" HorizontalAlignment="Right" Margin="0,80,290,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="secondShowResultButton_Click"/>
                 </Grid>
 
                 <Label x:Name="entryMessageLabel" FontSize="12" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>

@@ -380,7 +380,9 @@ namespace CSharp_Labs_WPF
                 case "Lab 5: Задание 3":
                     try
                     {
-
+                        HashSet<HashSet<string>> stats = Lab5.CreateShowStat("ShowsNames.txt", int.Parse(userValue1.Text));
+                        resultLabel.Content = Lab5.DouHashSetToString(stats);
+                        resultLabel.Content += "\n\n" + Lab5.ShowRating("ShowsNames.txt", Lab5.CreateShowStat("ShowsNames.txt", int.Parse(userValue1.Text)));
                     }
                     catch
                     {
@@ -391,9 +393,7 @@ namespace CSharp_Labs_WPF
                 case "Lab 5: Задание 4":
                     try
                     {
-                        resultLabel.Content = string.Join(" ", Lab5.DigintsInText("Lab5-3.txt"));
-                        
-                        
+                        resultLabel.Content = string.Join(" ", Lab5.DigintsInText("Lab5-3.txt"));                 
                     }
                     catch
                     {
@@ -405,7 +405,7 @@ namespace CSharp_Labs_WPF
                 case "Lab 5: Задание 5":
                     try
                     {
-
+                        resultLabel.Content = Lab5.GetOldestHuman("Lab5-5-Persons.txt");
                     }
                     catch
                     {
@@ -416,7 +416,14 @@ namespace CSharp_Labs_WPF
                 case "Lab 5: Задание 6":
                     try
                     {
-                        Lab5.CreateToysFile("A", "B", "C", "D");
+                        Lab5.CreateToysFile("A", "B", "C", "D", "E");
+                        List<Lab5.Toy> toys = Lab5.FileToValue<List<Lab5.Toy>>("lab5-6.xml");
+                        resultLabel.Content = "";
+                        foreach (Lab5.Toy item in toys)
+                        {
+                            resultLabel.Content += item.name + " " + item.price + " " + item.minAge + " " + item.maxAge + '\n';
+                        }
+                        resultLabel.Content += '\n' + Lab5.RichestToyForKids();
                     }
                     catch
                     {
@@ -438,6 +445,7 @@ namespace CSharp_Labs_WPF
 
             VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
                                                ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
+            VisualChanger.ChangeVisible(false, secondShowResultButton);
         }
 
         void TaskChanger(string taskName, string taskText, string entryMessage, uint type = 0, string v1 = "", string v2 = "", string v3 = "")
@@ -452,11 +460,17 @@ namespace CSharp_Labs_WPF
                 VisualChanger.ChangeVisible(true, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3, 
                                                   ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
             }
+            else if (type == 2)
+            {            
+                VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
+                                                   ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
+            }
             else
             {
                 VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
                                                    ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
             }
+            VisualChanger.ChangeVisible(false, secondShowResultButton);
         }
 
         void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
@@ -1067,7 +1081,8 @@ namespace CSharp_Labs_WPF
 
                          "Введите список",
 
-                         "?");
+                         2,
+                         "n = ");
                     break;
 
                 case "Lab 5: Задание 4":
@@ -1225,6 +1240,11 @@ namespace CSharp_Labs_WPF
             {
                 resultLabel.Content = resultLabel.Content + "\nA^т+B-3*C:\n" + ex.Message;
             }
+        }
+
+        private void secondShowResultButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

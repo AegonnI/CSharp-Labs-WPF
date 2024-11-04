@@ -6,11 +6,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Markup;
+using System.Windows.Shapes;
 using System.Xml.Serialization;
+using static CSharp_Labs_WPF.Lab5;
 namespace CSharp_Labs_WPF
 {
-    internal static class Lab5
+    public static class Lab5
     {
         [Serializable]
         internal class Person
@@ -54,6 +57,36 @@ namespace CSharp_Labs_WPF
             }
         }
 
+        public static string GetOldestHuman(string path)
+        {
+            if (!File.Exists(path)) throw new Exception("File not Found");
+            
+            StreamReader reader = new StreamReader(path);
+
+            int oldsCount = 1;
+            string person = "";
+            DateTime date = new DateTime(2100, 12, 31);
+
+            while (!reader.EndOfStream)
+            {
+                string[] line = reader.ReadLine().Split(' ');
+                DateTime.TryParseExact(line[2], "dd.MM.yyyy", null, DateTimeStyles.None, out DateTime personDate);
+                if (personDate == date)
+                {
+                    oldsCount++;
+                }
+                if (personDate < date)
+                {
+                    oldsCount = 1;
+                    date = personDate;
+                    person = line[0] + " " + line[1];
+                }
+            }
+            reader.Close();
+
+            return oldsCount == 1 ? person : oldsCount.ToString();
+        }
+
         [Serializable]
         public struct Toy
         {
@@ -69,13 +102,42 @@ namespace CSharp_Labs_WPF
             Random random = new Random();
             for (int i = 0; i < toysNames.Length; i++)
             {
-                toys.Add(new Toy { name = toysNames[i], price = random.Next(10, 100), minAge = random.Next(0, 2), maxAge = random.Next(2, 7) });
+                toys.Add(new Toy { name = toysNames[i], price = random.Next(10, 100), minAge = random.Next(0, 3), maxAge = random.Next(3, 5) });
             }
 
-            XmlSerializer xml = new XmlSerializer(typeof(List<Toy>));
+            XmlSerializer xml = new XmlSerializer(toys.GetType());
             FileStream f = new FileStream("lab5-6.xml",
                                           FileMode.Create, FileAccess.ReadWrite, FileShare.Read);
             xml.Serialize(f, toys);
+            f.Close();
+        }
+
+        public static string RichestToyForKids()
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(List<Toy>));
+            FileStream f = new FileStream("lab5-6.xml", FileMode.Open);
+            List<Toy> toys = (List<Toy>)xml.Deserialize(f);
+            f.Close();
+            //toys.Max(x => x.price);
+            string name = "Toy not found, please grow up";
+            int maxPrice = 0;
+            foreach (Toy toy in toys) 
+            {
+                if (toy.minAge == 2 && toy.maxAge == 3 && toy.price >= maxPrice)
+                {
+                    name = "Richest Toy for Kinds 2-3 years old: " + toy.name;
+                }
+            }
+            return name;
+        }
+
+        public static T FileToValue<T>(string path)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(T));
+            FileStream f = new FileStream(path, FileMode.Open);
+            T item = (T)xml.Deserialize(f);
+            f.Close();
+            return item;
         }
 
         //public static string MostAgePerson()
@@ -143,6 +205,80 @@ namespace CSharp_Labs_WPF
             }
 
             return minIndex;
+        }
+
+        public static HashSet<HashSet<string>> CreateShowStat(string path, int showCount)
+        {
+            if (!File.Exists(path)) throw new Exception("Files not found");
+            //StreamReader reader = new StreamReader(path);
+
+            string[] shows = File.ReadAllText(path).Split('\n');
+
+            //while (!reader.EndOfStream)
+            //{
+            //    
+            //}
+
+            HashSet<HashSet<string>> stat = new HashSet<HashSet<string>>();
+            Random random = new Random();
+            for (int i = 0; i < showCount; i++) 
+            { 
+                int r = random.Next(showCount);                
+                HashSet<string> hashSet = new HashSet<string>();
+                for (int j = 0; j < r; j++)
+                {
+                    hashSet.Add(shows[random.Next(shows.Length)]);
+                }
+                stat.Add(hashSet);
+            }
+            return stat;
+        }
+
+        public static string DouHashSetToString(HashSet<HashSet<string>> dHashSet)
+        {
+            string res = "";
+            int i = 1;
+            foreach (HashSet<string> hashSet in dHashSet)
+            {
+                res += i.ToString() + ": ";
+                foreach (string item in hashSet)
+                {
+                    res += item.Trim('\r', '\n') + ", ";
+                }
+                i++;
+                res = res.Trim(',', ' ') + "\n";
+            }
+            return res.Trim('\n');
+        }
+
+        public static string ShowRating(string path, HashSet<HashSet<string>> statistics)
+        {
+            if (!File.Exists(path)) throw new Exception("Files not found");
+
+            string[] showsNames = File.ReadAllText(path).Split('\n');
+
+            Dictionary<string, int> fansCount = new Dictionary<string, int>();
+            foreach (string show in showsNames)
+            {
+                fansCount[show] = 0;
+            }
+         
+            foreach (HashSet<string> shows in statistics) 
+            {
+                foreach (string show in shows) 
+                {
+                    fansCount[show] += 1;
+                }
+            }
+
+            string res = "";
+
+            foreach (KeyValuePair<string, int> pair in fansCount)
+            {
+                res += pair.Key.Trim('\r', '\n') + ": " + (pair.Value == statistics.Count ? "all" : (pair.Value == 0 ? "no one" : "some")) + "\n";
+            }
+            return res.Trim('\n');
+
         }
 
     }
