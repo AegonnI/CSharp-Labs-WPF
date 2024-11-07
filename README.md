@@ -91,8 +91,8 @@ public static HashSet<char> DigintsInText(string path) {...}
 public static string GetOldestHuman(string path) {...}
 
 // Ex6
-public static void CreateToysFile(params string[] toysNames) {...}
-public static string RichestToyForKids() {...}
+public static void CreateToysFile(string path, params string[] toysNames) {...}
+public static string RichestToyForKids(string path) {...}
 
 // Others
 public static T FileToValue<T>(string path) {...}
