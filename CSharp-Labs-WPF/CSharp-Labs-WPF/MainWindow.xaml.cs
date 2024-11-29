@@ -416,14 +416,14 @@ namespace CSharp_Labs_WPF
                 case "Lab 5: Задание 6":
                     try
                     {
-                        Lab5.CreateToysFile("A", "B", "C", "D", "E");
+                        Lab5.CreateToysFile("lab5-6.xml", "A", "B", "C", "D", "E");
                         List<Lab5.Toy> toys = Lab5.FileToValue<List<Lab5.Toy>>("lab5-6.xml");
                         resultLabel.Content = "";
                         foreach (Lab5.Toy item in toys)
                         {
                             resultLabel.Content += item.name + " " + item.price + " " + item.minAge + " " + item.maxAge + '\n';
                         }
-                        resultLabel.Content += '\n' + Lab5.RichestToyForKids();
+                        resultLabel.Content += '\n' + Lab5.RichestToyForKids("lab5-6.xml");
                     }
                     catch
                     {

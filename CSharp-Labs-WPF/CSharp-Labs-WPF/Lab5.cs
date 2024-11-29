@@ -175,7 +175,7 @@ namespace CSharp_Labs_WPF
         }
 
         // Ex6
-        public static void CreateToysFile(params string[] toysNames)
+        public static void CreateToysFile(string path, params string[] toysNames)
         {
             List<Toy> toys = new List<Toy>();
             Random random = new Random();
@@ -185,16 +185,16 @@ namespace CSharp_Labs_WPF
             }
 
             XmlSerializer xml = new XmlSerializer(toys.GetType());
-            FileStream f = new FileStream("lab5-6.xml",
+            FileStream f = new FileStream(path,
                                           FileMode.Create, FileAccess.ReadWrite, FileShare.Read);
             xml.Serialize(f, toys);
             f.Close();
         }
 
-        public static string RichestToyForKids()
+        public static string RichestToyForKids(string path)
         {
             XmlSerializer xml = new XmlSerializer(typeof(List<Toy>));
-            FileStream f = new FileStream("lab5-6.xml", FileMode.Open);
+            FileStream f = new FileStream(path, FileMode.Open);
             List<Toy> toys = (List<Toy>)xml.Deserialize(f);
             f.Close();
             //toys.Max(x => x.price);
