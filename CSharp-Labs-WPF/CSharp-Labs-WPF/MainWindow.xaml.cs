@@ -2,24 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Linq;
+
 
 namespace CSharp_Labs_WPF
 {
@@ -34,6 +20,8 @@ namespace CSharp_Labs_WPF
         private Matrix A = new Matrix();
         private Matrix B = new Matrix();
         private Matrix C = new Matrix();
+
+        private ExcelDataBase excelDataBase;
 
         public MainWindow()
         {
@@ -431,6 +419,18 @@ namespace CSharp_Labs_WPF
                     }
                     break;
 
+                case "Lab 6":
+                    try
+                    {
+                        excelDataBase = new ExcelDataBase(Path.GetFullPath(@"..\..\data\LR6-var13.xls"), Path.GetFullPath(@"..\..\data\LR6-var13.xlsx"));
+                    }
+                    catch(Exception ex)
+                    {
+                        resultLabel.Content = "Incorrect input, try again!";
+                        resultLabel.Content = ex.Message;
+                    }
+                    break;
+
                 default:
                     break;
             }
@@ -444,8 +444,7 @@ namespace CSharp_Labs_WPF
             ChangeInputField(v1, v2, v3);
 
             VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
-                                               ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
-            VisualChanger.ChangeVisible(false, secondShowResultButton);
+                                               ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton, secondShowResultButton);
         }
 
         void TaskChanger(string taskName, string taskText, string entryMessage, uint type = 0, string v1 = "", string v2 = "", string v3 = "")
@@ -455,8 +454,13 @@ namespace CSharp_Labs_WPF
             entryMessageLabel.Content = entryMessage;
             ChangeInputField(v1, v2, v3);
 
+            VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
+                                   ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton, secondShowResultButton);
             if (type == 1)
             {
+                ChooseMatrixA.Content = "A";
+                ChooseMatrixB.Content = "B";
+                ChooseMatrixC.Content = "C";
                 VisualChanger.ChangeVisible(true, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3, 
                                                   ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
             }
@@ -465,12 +469,18 @@ namespace CSharp_Labs_WPF
                 VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
                                                    ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
             }
+            else if (type == 3)
+            {
+                ChooseMatrixA.Content = "Счета";
+                ChooseMatrixB.Content = "Курс Валют";
+                ChooseMatrixC.Content = "Поступления";
+                VisualChanger.ChangeVisible(true, ChooseMatrixA, ChooseMatrixB, ChooseMatrixC);
+            }
             else
             {
                 VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
-                                                   ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton);
+                                       ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton, secondShowResultButton);
             }
-            VisualChanger.ChangeVisible(false, secondShowResultButton);
         }
 
         void ChangeInputField(string v1 = "", string v2 = "", string v3 = "")
@@ -1157,6 +1167,16 @@ namespace CSharp_Labs_WPF
                          0);
                     break;
 
+                case "Lab 6":
+                    TaskChanger("",
+
+                         "1. Чтение базы данных из excel файла",
+
+                         "",
+
+                         3);
+                    break;
+
                 default:
                     break;
             }
@@ -1245,6 +1265,22 @@ namespace CSharp_Labs_WPF
         private void secondShowResultButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ShowDataBase_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ChooseMatrixA.IsEnabled)
+            {
+                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetAccount());
+            }
+            else if (!ChooseMatrixB.IsEnabled)
+            {
+                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetExchangeRate());
+            }
+            else if (!ChooseMatrixC.IsEnabled)
+            {
+                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetAccrual());
+            }
         }
     }
 }

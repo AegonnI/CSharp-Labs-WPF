@@ -58,6 +58,7 @@
             <ComboBoxItem Content="Lab 5: Задание 4"/>
             <ComboBoxItem Content="Lab 5: Задание 5"/>
             <ComboBoxItem Content="Lab 5: Задание 6"/>
+            <ComboBoxItem Content="Lab 6"/>
         </ComboBox>
 
         <Grid x:Name="inputAndOutput">
@@ -78,19 +79,35 @@
 
                     <Button x:Name="showResultButton" Grid.Column="2" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Right" Margin="0,57,370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
                     <Button x:Name="secondShowResultButton" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Записать Предпочтения" HorizontalAlignment="Right" Margin="0,80,290,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="secondShowResultButton_Click"/>
+                    <Button x:Name="ShowDataBase" Grid.Column="2" Content="Show Data Base" HorizontalAlignment="Left" Margin="330,184,0,0" VerticalAlignment="Top" Click="ShowDataBase_Click"/>
                 </Grid>
 
                 <Label x:Name="entryMessageLabel" FontSize="12" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
             </Grid>
 
+            <Grid HorizontalAlignment="Right" Margin="0,0,170,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ChooseMatrixA" Grid.Column="0" FontSize="12" FontFamily="Lucida Console" Content="A" HorizontalAlignment="Right" Margin="0,55,5,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseMatrixA_Click"/>
+                <Button x:Name="ChooseMatrixB" Grid.Column="0" FontSize="12" FontFamily="Lucida Console" Content="B" HorizontalAlignment="Right" Margin="0,76,5,0" VerticalAlignment="Top" Click="ChooseMatrixB_Click"/>
+                <Button x:Name="ChooseMatrixC" Grid.Column="0" FontSize="12" FontFamily="Lucida Console" Content="C" HorizontalAlignment="Right" Margin="0,97,5,0" VerticalAlignment="Top" Click="ChooseMatrixC_Click"/>
+                <Button x:Name="ChooseConstructor1" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Content="Constructor 1" HorizontalAlignment="Left" Margin="0,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseConstructor1_Click"/>
+                <Button x:Name="ChooseConstructor2" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Content="Constructor 2" HorizontalAlignment="Left" Margin="0,76,0,0" VerticalAlignment="Top" Click="ChooseConstructor2_Click"/>
+                <Button x:Name="ChooseConstructor3" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Content="Constructor 3" HorizontalAlignment="Left" Margin="0,97,0,0" VerticalAlignment="Top" Click="ChooseConstructor3_Click"/>
+            </Grid>
+            
+            <!--
             <Button x:Name="ChooseMatrixA" FontSize="12" FontFamily="Lucida Console" Content="A" HorizontalAlignment="Left" Margin="853,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseMatrixA_Click"/>
             <Button x:Name="ChooseMatrixB" FontSize="12" FontFamily="Lucida Console" Content="B" HorizontalAlignment="Left" Margin="853,76,0,0" VerticalAlignment="Top" Click="ChooseMatrixB_Click"/>
             <Button x:Name="ChooseMatrixC" FontSize="12" FontFamily="Lucida Console" Content="C" HorizontalAlignment="Left" Margin="853,97,0,0" VerticalAlignment="Top" Click="ChooseMatrixC_Click"/>
             <Button x:Name="ChooseConstructor1" FontSize="12" FontFamily="Lucida Console" Content="Constructor 1" HorizontalAlignment="Left" Margin="870,55,0,0" VerticalAlignment="Top" IsEnabled="False" Click="ChooseConstructor1_Click"/>
             <Button x:Name="ChooseConstructor2" FontSize="12" FontFamily="Lucida Console" Content="Constructor 2" HorizontalAlignment="Left" Margin="870,76,0,0" VerticalAlignment="Top" Click="ChooseConstructor2_Click"/>
             <Button x:Name="ChooseConstructor3" FontSize="12" FontFamily="Lucida Console" Content="Constructor 3" HorizontalAlignment="Left" Margin="870,97,0,0" VerticalAlignment="Top" Click="ChooseConstructor3_Click"/>
+            -->
             <Button x:Name="calculateButton" FontSize="12" FontFamily="Lucida Console" Content="A^т+B-3*C" HorizontalAlignment="Left" Margin="899,118,0,0" VerticalAlignment="Top" Click="calculateButton_Click"/>
-
+            
             <Grid x:Name="output" Panel.ZIndex="-1">
                 <Label x:Name="resultLabel" FontSize="16" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="620,139,0,0" VerticalAlignment="Top" BorderBrush="Orange" Background="{x:Null}" BorderThickness="1,1,1,1"/>
             </Grid>
