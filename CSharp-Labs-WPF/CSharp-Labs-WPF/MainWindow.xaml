@@ -80,7 +80,13 @@
                     <Button x:Name="showResultButton" Grid.Column="2" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Show_Result" HorizontalAlignment="Right" Margin="0,57,370,0" VerticalAlignment="Top" Click="Show_Result_Click"/>
                     <Button x:Name="secondShowResultButton" Grid.Column="1" FontSize="12" FontFamily="Lucida Console" Background="{DynamicResource SecondBackground}" Foreground="{DynamicResource Foreground}" Content="Записать Предпочтения" HorizontalAlignment="Right" Margin="0,80,290,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Click="secondShowResultButton_Click"/>
                     <Button x:Name="ShowDataBase" Grid.Column="2" Content="Show Data Base" HorizontalAlignment="Left" Margin="330,184,0,0" VerticalAlignment="Top" Click="ShowDataBase_Click"/>
+                    <Button x:Name="DelElem" Grid.Column="2" IsEnabled="False" Content="Delete Elements" HorizontalAlignment="Left" Margin="330,204,0,0" VerticalAlignment="Top" Click="DelElem_Click"/>
+                    <Button x:Name="CorrectElem" Grid.Column="2" Content="Correct Element" HorizontalAlignment="Left" Margin="330,224,0,0" VerticalAlignment="Top" Click="CorrectElem_Click"/>
+                    <Button x:Name="AddElem" Grid.Column="2" Content="Add Element" HorizontalAlignment="Left" Margin="330,244,0,0" VerticalAlignment="Top" Click="AddElem_Click"/>
                 </Grid>
+                <Button x:Name="Del" Content="Delete" HorizontalAlignment="Right" Margin="330,204,0,0" VerticalAlignment="Top" Click="Del_Click"/>
+                <Button x:Name="Correct" Content="Correct" HorizontalAlignment="Right" Margin="330,224,0,0" VerticalAlignment="Top"/>
+                <Button x:Name="Add" Content="Add" HorizontalAlignment="Right" Margin="330,244,0,0" VerticalAlignment="Top"/>
 
                 <Label x:Name="entryMessageLabel" FontSize="12" FontFamily="Lucida Console" Foreground="{DynamicResource Foreground}" Content="Label" HorizontalAlignment="Left" Margin="607,16,0,0" VerticalAlignment="Top"/>
             </Grid>

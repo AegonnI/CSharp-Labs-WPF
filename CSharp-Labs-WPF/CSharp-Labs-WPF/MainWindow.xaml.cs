@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -420,6 +421,14 @@ namespace CSharp_Labs_WPF
                     break;
 
                 case "Lab 6":
+                    DelElem.IsEnabled = false;
+                    CorrectElem.IsEnabled = true;
+                    AddElem.IsEnabled = true;
+                    userValue1.IsEnabled = true;
+                    ChooseMatrixA.IsEnabled = false;
+                    ChooseMatrixB.IsEnabled = true;
+                    ChooseMatrixC.IsEnabled = true;
+                    ShowDataBase.IsEnabled = true;
                     try
                     {
                         excelDataBase = new ExcelDataBase(Path.GetFullPath(@"..\..\data\LR6-var13.xls"), Path.GetFullPath(@"..\..\data\LR6-var13.xlsx"));
@@ -456,6 +465,7 @@ namespace CSharp_Labs_WPF
 
             VisualChanger.ChangeVisible(false, ChooseConstructor1, ChooseConstructor2, ChooseConstructor3,
                                    ChooseMatrixA, ChooseMatrixB, ChooseMatrixC, calculateButton, secondShowResultButton);
+            showResultButton.Content = "ShowResult";
             if (type == 1)
             {
                 ChooseMatrixA.Content = "A";
@@ -471,6 +481,7 @@ namespace CSharp_Labs_WPF
             }
             else if (type == 3)
             {
+                showResultButton.Content = "Считать базу данных";
                 ChooseMatrixA.Content = "Счета";
                 ChooseMatrixB.Content = "Курс Валют";
                 ChooseMatrixC.Content = "Поступления";
@@ -529,6 +540,10 @@ namespace CSharp_Labs_WPF
             userValue1.Text = "";
             userValue2.Text = "";
             userValue3.Text = "";
+
+            userValue1.IsEnabled = true;
+            ChooseMatrixB.IsEnabled = true;
+            ChooseMatrixC.IsEnabled = true;
 
             switch (task)
             {
@@ -1168,13 +1183,22 @@ namespace CSharp_Labs_WPF
                     break;
 
                 case "Lab 6":
+                    DelElem.IsEnabled = false;
+                    CorrectElem.IsEnabled = false;
+                    AddElem.IsEnabled = false;
+                    userValue1.IsEnabled = false;
+                    ChooseMatrixA.IsEnabled = false;
+                    ChooseMatrixB.IsEnabled = false;
+                    ChooseMatrixC.IsEnabled = false;
+                    ShowDataBase.IsEnabled = false;
                     TaskChanger("",
 
                          "1. Чтение базы данных из excel файла",
 
                          "",
 
-                         3);
+                         3,
+                         "ID = ");
                     break;
 
                 default:
@@ -1268,6 +1292,50 @@ namespace CSharp_Labs_WPF
         }
 
         private void ShowDataBase_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ChooseMatrixA.IsEnabled)
+            {
+                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetAccount());
+            }
+            else if (!ChooseMatrixB.IsEnabled)
+            {
+                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetExchangeRate());
+            }
+            else if (!ChooseMatrixC.IsEnabled)
+            {
+                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetAccrual());
+            }
+        }
+
+        private void DelElem_Click(object sender, RoutedEventArgs e)
+        {
+            DelElem.IsEnabled = false;
+            CorrectElem.IsEnabled = true;
+            AddElem.IsEnabled = true;
+        }
+
+        private void CorrectElem_Click(object sender, RoutedEventArgs e)
+        {
+            DelElem.IsEnabled = true;
+            CorrectElem.IsEnabled = false;
+            AddElem.IsEnabled = true;
+        }
+
+        private void AddElem_Click(object sender, RoutedEventArgs e)
+        {
+            DelElem.IsEnabled = true;
+            CorrectElem.IsEnabled = true;
+            AddElem.IsEnabled = false;
+        }
+
+        private void Del_Click(object sender, RoutedEventArgs e)
+        {
+            if (LabChecker.IsPosetiveInt(userValue1.Text))
+            {
+            }
+        }
+
+        private void DoWithTheChosenOne()
         {
             if (!ChooseMatrixA.IsEnabled)
             {
