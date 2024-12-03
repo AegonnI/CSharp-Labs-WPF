@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -1328,26 +1330,33 @@ namespace CSharp_Labs_WPF
             AddElem.IsEnabled = false;
         }
 
-        private void Del_Click(object sender, RoutedEventArgs e)
+        private void Execute_Click(object sender, RoutedEventArgs e)
         {
             if (LabChecker.IsPosetiveInt(userValue1.Text))
             {
+                DoWithTheChosenOne(
+                    !ChooseMatrixA.IsEnabled, 
+                    !ChooseMatrixB.IsEnabled, 
+                    !ChooseMatrixC.IsEnabled, 
+                    () => excelDataBase.DelElemInAccounts(int.Parse(userValue1.Text)), 
+                    () => excelDataBase.DelElemInExchangeRates(int.Parse(userValue1.Text)), 
+                    () => excelDataBase.DelElemInAccrual(int.Parse(userValue1.Text)));
             }
         }
 
-        private void DoWithTheChosenOne()
+        private void DoWithTheChosenOne(bool button1, bool button2, bool button3, Action funcA, Action funcB, Action funcC)
         {
-            if (!ChooseMatrixA.IsEnabled)
+            if (button1)
             {
-                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetAccount());
+                funcA();
             }
-            else if (!ChooseMatrixB.IsEnabled)
+            else if (button2)
             {
-                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetExchangeRate());
+                funcB();
             }
-            else if (!ChooseMatrixC.IsEnabled)
+            else if (button3)
             {
-                resultLabel.Content = ExcelDataBase.ShowDataBase(excelDataBase.GetAccrual());
+                funcC();
             }
         }
     }
